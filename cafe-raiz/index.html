@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Raíz | Café de especialidad, tostado a mano</title>
+<meta name="description" content="Café de especialidad de productores pequeños, tostado a mano en lotes chicos y con fecha de tueste en cada bolsa.">
+<meta name="theme-color" content="#F0E6D6">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Íconos reutilizados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.5-1.5-2-1-1 .5c-.9-.4-1.6-1.1-2-2l.5-1-1-2L9 9.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19l7-7"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 .5 1 1 1.5 2 1-1-3 0-5 1-7z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 15.8 12 22 12 22z"/><circle cx="12" cy="10.5" r="2.6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></symbol>
+</svg>
+
+<a class="skip" href="#contenido">Ir al contenido</a>
+
+<!-- 1. ENCABEZADO -->
+<header class="site-header">
+  <a class="brand" href="#" aria-label="Café Raíz, inicio"><img src="img/logo.jpg" width="72" height="72" alt="Café Raíz, café de origen, tostado artesanal"></a>
+  <nav class="nav" id="menu" aria-label="Principal">
+    <a href="#cafes">Cafés</a>
+    <a href="#historia">Historia</a>
+    <a href="#preguntas">Preguntas</a>
+  </nav>
+  <div class="header-actions">
+    <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar café</span></a>
+    <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+      <svg class="ico-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ico-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- 2. HERO -->
+<section class="hero" aria-labelledby="hero-t">
+  <div class="hero-text">
+    <h1 id="hero-t">Café de especialidad, tostado a mano.</h1>
+    <p class="lead">Compramos a productores pequeños, tostamos en lotes chicos y te lo llevamos fresco hasta tu taza.</p>
+    <img class="hero-m" src="img/hero.jpg" width="1200" height="683" alt="Taza de café humeante con el logo de Café Raíz, granos tostados y una bolsa de fondo" loading="lazy">
+    <hr class="rule">
+    <div class="hero-buy">
+      <div class="price-from">
+        <span class="price-from-n">Desde $12.900</span>
+        <span class="price-from-s">250 g, en grano o molido</span>
+      </div>
+      <a class="gbtn lg" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar café</span></a>
+    </div>
+    <a class="info" href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz.">
+      <img src="img/packaging.jpg" width="64" height="64" alt="" loading="lazy">
+      <span class="info-t"><b>¿Dudas?</b><span>Escribinos por WhatsApp</span></span>
+      <svg class="arr" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-photos" aria-hidden="true">
+    <div class="mq"><div class="track">
+      <div class="set">
+        <img style="height:340px;object-position:62% 50%" src="img/hero.jpg" width="1200" height="683" alt="" loading="lazy">
+        <img style="height:300px;object-position:70% 50%" src="img/tostadora.jpg" width="1200" height="673" alt="" loading="lazy">
+        <img style="height:360px;object-position:30% 45%" src="img/packaging.jpg" width="1000" height="800" alt="" loading="lazy">
+        <img style="height:320px" src="img/granos.jpg" width="1080" height="720" alt="" loading="lazy">
+      </div>
+      <div class="set">
+        <img style="height:340px;object-position:62% 50%" src="img/hero.jpg" width="1200" height="683" alt="" loading="lazy">
+        <img style="height:300px;object-position:70% 50%" src="img/tostadora.jpg" width="1200" height="673" alt="" loading="lazy">
+        <img style="height:360px;object-position:30% 45%" src="img/packaging.jpg" width="1000" height="800" alt="" loading="lazy">
+        <img style="height:320px" src="img/granos.jpg" width="1080" height="720" alt="" loading="lazy">
+      </div>
+    </div></div>
+    <div class="mq"><div class="track rev">
+      <div class="set">
+        <img style="height:320px;object-position:55% 40%" src="img/trabajador.jpg" width="1200" height="800" alt="" loading="lazy">
+        <img style="height:360px;object-position:30% 45%" src="img/packaging.jpg" width="1000" height="800" alt="" loading="lazy">
+        <img style="height:300px;object-position:70% 50%" src="img/tostadora.jpg" width="1200" height="673" alt="" loading="lazy">
+        <img style="height:340px;object-position:62% 50%" src="img/hero.jpg" width="1200" height="683" alt="" loading="lazy">
+      </div>
+      <div class="set">
+        <img style="height:320px;object-position:55% 40%" src="img/trabajador.jpg" width="1200" height="800" alt="" loading="lazy">
+        <img style="height:360px;object-position:30% 45%" src="img/packaging.jpg" width="1000" height="800" alt="" loading="lazy">
+        <img style="height:300px;object-position:70% 50%" src="img/tostadora.jpg" width="1200" height="673" alt="" loading="lazy">
+        <img style="height:340px;object-position:62% 50%" src="img/hero.jpg" width="1200" height="683" alt="" loading="lazy">
+      </div>
+    </div></div>
+    <div class="fade fade-t"></div>
+    <div class="fade fade-b"></div>
+  </div>
+</section>
+
+<!-- 3. FRANJA DE CONFIANZA -->
+<section class="trust" aria-labelledby="trust-t">
+  <h2 id="trust-t" class="sr-only">Por qué Café Raíz</h2>
+  <div class="trust-item">
+    <svg width="40" height="40" aria-hidden="true"><use href="#i-leaf"/></svg>
+    <h3>Origen</h3>
+    <p>Granos de productores que conocemos por su nombre.</p>
+  </div>
+  <div class="trust-item">
+    <svg width="40" height="40" aria-hidden="true"><use href="#i-fire"/></svg>
+    <h3>Oficio</h3>
+    <p>Tueste artesanal, en lotes chicos.</p>
+  </div>
+  <div class="trust-item">
+    <svg width="40" height="40" aria-hidden="true"><use href="#i-check"/></svg>
+    <h3>Honestidad</h3>
+    <p>Café real, con fecha de tueste en cada bolsa.</p>
+  </div>
+</section>
+
+<!-- 4. NUESTROS CAFÉS -->
+<section id="cafes" class="cafes" aria-labelledby="cafes-t">
+  <div class="cafes-head">
+    <div class="sec-head">
+      <p class="eb">Nuestros cafés</p>
+      <h2 id="cafes-t" class="t">Elegí tu café.</h2>
+    </div>
+  </div>
+
+  <div class="carousel" role="region" aria-roledescription="carrusel" aria-label="Nuestros cafés">
+    <ul class="slides" id="cafes-slides">
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Misiones, Argentina</div>
+          <h3 class="h3">Don Aníbal</h3>
+          <div class="line"><span>Tueste medio claro</span><span class="dots" role="img" aria-label="Tueste 2 de 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Miel y almendra</span></div>
+          <div class="price"><div><span>250 g</span><b>$16.500</b></div><div><span>500 g</span><b>$30.500</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Caranavi, Yungas, Bolivia</div>
+          <h3 class="h3">Doña Elvira</h3>
+          <div class="line"><span>Tueste medio</span><span class="dots" role="img" aria-label="Tueste 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Durazno y panela</span></div>
+          <div class="price"><div><span>250 g</span><b>$15.500</b></div><div><span>500 g</span><b>$28.500</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Sul de Minas, Brasil</div>
+          <h3 class="h3">Familia Silveira</h3>
+          <div class="line"><span>Tueste medio oscuro</span><span class="dots" role="img" aria-label="Tueste 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Chocolate y avellana</span></div>
+          <div class="price"><div><span>250 g</span><b>$13.900</b></div><div><span>500 g</span><b>$25.500</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Salta, Argentina</div>
+          <h3 class="h3">Doña Rosa</h3>
+          <div class="line"><span>Tueste medio</span><span class="dots" role="img" aria-label="Tueste 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Mandarina y caramelo</span></div>
+          <div class="price"><div><span>250 g</span><b>$16.900</b></div><div><span>500 g</span><b>$31.000</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Cajamarca, Perú</div>
+          <h3 class="h3">Don Julián</h3>
+          <div class="line"><span>Tueste medio oscuro</span><span class="dots" role="img" aria-label="Tueste 4 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Cacao y nuez</span></div>
+          <div class="price"><div><span>250 g</span><b>$15.800</b></div><div><span>500 g</span><b>$29.000</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Huila, Colombia</div>
+          <h3 class="h3">Familia Mejía</h3>
+          <div class="line"><span>Tueste medio</span><span class="dots" role="img" aria-label="Tueste 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Caramelo y naranja</span></div>
+          <div class="price"><div><span>250 g</span><b>$15.200</b></div><div><span>500 g</span><b>$28.000</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+      <li class="slide"><article class="card">
+        <div class="ph"><img src="img/packaging.jpg" width="1000" height="800" alt="Bolsa de Café Raíz de 250 g junto a granos tostados" loading="lazy"></div>
+        <div class="body">
+          <div class="eb">Mezcla de orígenes</div>
+          <h3 class="h3">Blend de la casa</h3>
+          <div class="line"><span>Tueste medio</span><span class="dots" role="img" aria-label="Tueste 3 de 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="line"><span class="lab">Notas</span><span>Chocolate, dulce de leche y frutos secos</span></div>
+          <div class="price"><div><span>250 g</span><b>$12.900</b></div><div><span>500 g</span><b>$23.500</b></div></div>
+          <div class="lab">En grano o molido. Elegís al comprar.</div>
+          <a class="gbtn" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar</span></a>
+        </div>
+      </article></li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- 5. HISTORIA -->
+<section id="historia" class="historia" aria-labelledby="historia-t">
+  <div class="historia-text">
+    <h2 id="historia-t" class="t">De la finca a tu taza.</h2>
+    <div class="feats">
+      <div class="feat">
+        <svg width="40" height="40" aria-hidden="true"><use href="#i-leaf"/></svg>
+        <p>Todo empieza en la tierra, donde cada grano madura despacio y alguien lo cuida con las manos. A esas personas las conocemos por su nombre, y a ellas les compramos.</p>
+      </div>
+      <div class="feat">
+        <svg width="40" height="40" aria-hidden="true"><use href="#i-fire"/></svg>
+        <p>Después nos toca a nosotros: tostar en lotes chicos, con paciencia, hasta dar con el punto justo en que el grano suelta su aroma.</p>
+      </div>
+      <div class="feat">
+        <svg width="40" height="40" aria-hidden="true"><use href="#i-check"/></svg>
+        <p>Nos desvela el detalle: de dónde viene, cuánto se tuesta, qué tan fresco llega. Por eso no hay atajos. Para que, al servir la taza, todavía se sienta la tierra de donde vino.</p>
+      </div>
+    </div>
+  </div>
+  <div class="historia-pics">
+    <div class="pic pic-a"><img src="img/trabajador.jpg" width="1200" height="800" alt="Trabajador de la finca cosechando a mano cerezas de café maduras" loading="lazy"></div>
+    <div class="pic pic-b"><img src="img/tostadora.jpg" width="1200" height="673" alt="Tostadora con granos de café recién tostados y vapor" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- 6. PREGUNTAS FRECUENTES -->
+<section id="preguntas" class="preguntas" aria-labelledby="preguntas-t">
+  <h2 id="preguntas-t" class="t">Preguntas frecuentes</h2>
+  <div class="faq">
+    <details open>
+      <summary>¿Cuál me conviene si no entiendo de café?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Arrancá por el de Don Aníbal: tueste medio claro, dulce, con miel y almendra. Y si querés, <a href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz.">escribinos</a> y te ayudamos a elegir.</p>
+    </details>
+    <details>
+      <summary>¿Qué tan fresco llega?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Tostamos en lotes chicos y cada bolsa lleva su fecha de tueste.</p>
+    </details>
+    <details>
+      <summary>¿Grano o molido?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Grano si tenés molinillo, porque dura más fresco. Molido si no: elegís la molienda al comprar.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto tarda en llegar?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Enviamos a todo el país y despachamos dentro de las 48 horas hábiles después del tueste.</p>
+    </details>
+    <details>
+      <summary>¿Qué hay detrás del precio?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Le pagamos un precio justo a cada productor y tostamos en lotes chicos, para que cada bolsa llegue fresca. Es lo que se nota en la taza.</p>
+    </details>
+    <details>
+      <summary>¿Puedo consultar antes de comprar?<svg width="28" height="28" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <p class="ans">Claro. <a href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz.">Escribinos por WhatsApp</a>.</p>
+    </details>
+  </div>
+</section>
+
+<!-- 7. CIERRE -->
+<section id="contacto" class="cierre" aria-labelledby="cierre-t">
+  <div class="cierre-grid">
+    <div class="cierre-text">
+      <h2 id="cierre-t">¿Listo para probarlo?</h2>
+      <p class="cierre-lead">Pedilo en la tienda y te lo despachamos con su fecha de tueste.</p>
+      <a class="gbtn lg" href="https://tienda.cafe-raiz.test"><span class="gin">Comprar café</span></a>
+      <hr class="rule-d">
+      <ul class="vias">
+        <li>
+          <a class="via" href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz.">
+            <span class="via-ico"><svg width="24" height="24" aria-hidden="true"><use href="#i-wa"/></svg></span>
+            <span class="via-t"><b>¿Dudas o querés un consejo?</b><span>Te respondemos por WhatsApp</span></span>
+            <svg class="arr" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="via" href="https://www.google.com/maps/search/?api=1&amp;query=Armenia+y+Costa+Rica,+Palermo,+Buenos+Aires">
+            <span class="via-ico"><svg width="24" height="24" aria-hidden="true"><use href="#i-pin"/></svg></span>
+            <span class="via-t"><b>Los sábados, en la feria</b><span>Feria de Plaza Armenia, Palermo · de 10 a 18 h</span></span>
+            <svg class="arr" width="24" height="24" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="mapbox">
+      <iframe src="https://maps.google.com/maps?q=Armenia+y+Costa+Rica,+Palermo,+Buenos+Aires&amp;z=16&amp;output=embed" title="Mapa de la feria de Plaza Armenia, Palermo, Buenos Aires" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 8. PIE -->
+<footer class="site-footer">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <img src="img/logo-negativo.jpg" width="140" height="140" alt="Café Raíz, café de origen, tostado artesanal" loading="lazy">
+      <p>Café de especialidad · Tostado artesanal</p>
+    </div>
+    <div class="foot-links">
+      <nav class="fl" aria-label="Pie">
+        <p class="fh">Café Raíz</p>
+        <a href="#cafes">Cafés</a>
+        <a href="#historia">Historia</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <div class="fl">
+        <p class="fh">Contacto</p>
+        <a href="https://instagram.com/cafe_raiz_ejemplo">Instagram @cafe_raiz_ejemplo</a>
+        <a href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz.">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <hr class="rule-d">
+  <div class="foot-bottom">
+    <div class="socs">
+      <a class="soc" href="https://instagram.com/cafe_raiz_ejemplo" aria-label="Instagram de Café Raíz"><svg width="22" height="22" aria-hidden="true"><use href="#i-ig"/></svg></a>
+      <a class="soc" href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20consultar%20por%20un%20caf%C3%A9%20de%20Caf%C3%A9%20Ra%C3%ADz." aria-label="WhatsApp de Café Raíz"><svg width="22" height="22" aria-hidden="true"><use href="#i-wa"/></svg></a>
+    </div>
+    <p>© 2026 Café Raíz</p>
+  </div>
+</footer>
+
+</body>
+</html>
