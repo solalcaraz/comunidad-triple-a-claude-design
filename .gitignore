@@ -1,0 +1,15 @@
+# Material privado de la comunidad (consignas, manuales, plantillas, prompts, notas)
+_privado/
+*.docx
+*.pdf
+*.zip
+
+# Vercel (vinculo local con el proyecto, no va al repo)
+.vercel/
+
+# Dependencias y basura del sistema
+node_modules/
+.env
+.env.*
+Thumbs.db
+.DS_Store
