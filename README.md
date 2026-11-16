@@ -4,9 +4,11 @@ Casos de práctica del módulo de Claude Design de la comunidad Triple A, en 202
 
 ## Los casos
 
-| Caso | Rubro | Problema que resuelve | Demo |
-|---|---|---|---|
-| [Café Raíz](cafe-raiz/README.md) | Café de especialidad | Quien llega por primera vez no sabe qué elegir ni si puede confiar. Una landing cuenta el origen y una tienda arma el pedido y lo envía por WhatsApp. | [Ver web](https://cafe-raiz-especialidad.vercel.app) |
+| Caso | Rubro | Problema que resuelve | Demo | Performance en celular |
+|---|---|---|---|---|
+| [Café Raíz](cafe-raiz/README.md) | Café de especialidad | Quien llega por primera vez no sabe qué elegir ni si puede confiar. Una landing cuenta el origen y una tienda arma el pedido y lo envía por WhatsApp. | [Ver web](https://cafe-raiz-especialidad.vercel.app) | Landing 99, tienda 93 |
+
+Puntajes de Performance de Lighthouse, medidos en modo celular con Chrome sobre los links publicados. Las dos páginas sacaron 100 en Accesibilidad. Antes de ajustar la carga, la landing tenía 88 y la tienda 68.
 
 El segundo caso del módulo (Crudo) todavía no está en este repo.
 
