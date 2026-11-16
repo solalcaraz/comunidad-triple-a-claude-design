@@ -49,6 +49,7 @@ Las decisiones que tomé y por qué:
 - **Tono de la marca en cada texto.** Voseo, cálido y sin jerga, como pide el manual. Evité las palabras que el manual rechaza, como "organoléptico" o "premium".
 - **Pensada para el celular.** Todo lo tocable mide al menos 44 px, los filtros que no entran se deslizan con una flecha y en el pack destacado el botón de agregar va debajo de la cantidad.
 - **Carga más liviana, a partir de Lighthouse.** Mostró que la imagen principal se cargaba tarde, que las fuentes de Google frenaban la primera pantalla y que los packs se armaban sin espacio reservado. Ahora la imagen principal carga primero, las fuentes no bloquean y el espacio de packs y cafés queda reservado. En celular, la tienda pasó de 68 a 93 y la landing de 88 a 99 en Performance.
+- **Mapa real de Google en el cierre.** Lo dejé embebido aunque Lighthouse baja las Buenas prácticas de la landing a 77 por las cookies de terceros de Google Maps: prefiero que el mapa se vea de entrada.
 - **Vista previa al compartir el link y favicon.** Para que se vea bien en WhatsApp. El favicon es el isotipo sobre el color Espresso.
 
 ## Cómo correrlo
@@ -68,6 +69,5 @@ Se ve en el link publicado: https://cafe-raiz-especialidad.vercel.app.
 **Qué mejoraría**
 
 - Generar fotos propias para los 4 packs y revisar las etiquetas de las bolsas.
-- Cambiar el mapa embebido por uno que se cargue solo al tocarlo. Es lo que baja las Buenas prácticas de la landing a 77: Lighthouse detecta 32 cookies de terceros de Google Maps.
 - Reemplazar los datos de ejemplo (WhatsApp, Instagram, feria) por los reales si el negocio fuera de verdad.
 - Sumar pagos en línea y control de stock.
