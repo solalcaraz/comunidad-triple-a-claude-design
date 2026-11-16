@@ -196,17 +196,19 @@ section[id] { scroll-margin-top: var(--header-h); }
 .js .slides { scrollbar-width: none; }
 .js .slides::-webkit-scrollbar { display: none; }
 
-/* Controles del carrusel (los crea script.js) */
-.car-ctrl { display: flex; align-items: center; justify-content: center; gap: 16px; position: absolute; right: 0; bottom: 0; }
+/* Controles del carrusel (los crea script.js): flechas a los costados, puntos abajo */
+.carousel { position: relative; }
 .car-btn {
-  width: 48px; height: 48px; flex: none; padding: 0; display: flex; align-items: center; justify-content: center;
+  position: absolute; top: 102px; transform: translateY(-50%); z-index: 2;
+  width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--crema); border-radius: 50%; background: var(--leche); color: var(--espresso);
-  box-shadow: var(--sombra); cursor: pointer; transition: background .25s ease;
+  box-shadow: var(--sombra-hover); cursor: pointer; transition: background .25s ease, opacity .25s ease;
 }
+.car-prev { left: -24px; }
+.car-next { right: -24px; }
 .car-btn:hover:not(:disabled) { background: var(--crema); }
-.car-btn:disabled { opacity: .4; cursor: default; box-shadow: none; }
-.car-dots { display: flex; align-items: center; }
-.car-count { display: none; min-width: 64px; text-align: center; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--espresso); }
+.car-btn:disabled { opacity: 0; pointer-events: none; }
+.car-dots { display: flex; align-items: center; justify-content: center; }
 .car-dot {
   width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--espresso);
   display: flex; align-items: center; justify-content: center; cursor: pointer;
@@ -335,7 +337,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   .track { animation: none; }
   .gbtn:hover { animation: none; }
   .card, .ph img, .pic, .pic img, .info, .info .arr, .faq details, .faq details::details-content,
-  .faq summary svg, .via, .via .arr, .soc { transition: none; }
+  .faq summary svg, .via, .via .arr, .soc, .car-btn { transition: none; }
   .card:hover .ph img, .pic:hover img { transform: none; }
   .soc:hover { transform: none; }
 }
@@ -384,9 +386,9 @@ section[id] { scroll-margin-top: var(--header-h); }
 
   .cafes { padding: 56px 16px; gap: 20px; }
   .cafes .t { font-size: 36px; line-height: 42px; }
-  .car-ctrl { position: static; margin-top: 20px; }
-  .car-dots { display: none; }
-  .car-count { display: block; }
+  .car-btn { top: 84px; width: 44px; height: 44px; }
+  .car-prev { left: 8px; }
+  .car-next { right: 8px; }
   .slides { gap: 16px; padding-bottom: 20px; }
   .slide { flex-basis: 84%; }
   .body .gbtn .gin { height: 52px; }

@@ -53,22 +53,15 @@
   pista.setAttribute("tabindex", "0");
   pista.setAttribute("aria-label", "Cafés: deslizá para ver más");
 
-  var ctrl = document.createElement("div");
-  ctrl.className = "car-ctrl";
-  var prev = crearBoton("car-btn", "Cafés anteriores", '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>');
-  var next = crearBoton("car-btn", "Cafés siguientes", '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>');
+  var prev = crearBoton("car-btn car-prev", "Cafés anteriores", '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>');
+  var next = crearBoton("car-btn car-next", "Cafés siguientes", '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>');
   var puntos = document.createElement("div");
   puntos.className = "car-dots";
-  var contador = document.createElement("span");
-  contador.className = "car-count";
-  contador.setAttribute("aria-hidden", "true");
-  ctrl.appendChild(prev);
-  ctrl.appendChild(puntos);
-  ctrl.appendChild(contador);
-  ctrl.appendChild(next);
-  // Los controles van arriba, junto al título, para que se vean sin bajar.
-  var cabecera = document.querySelector(".cafes-head") || pista.parentNode;
-  cabecera.appendChild(ctrl);
+  // Las flechas van a los costados de las tarjetas y los puntos debajo.
+  var carrusel = pista.parentNode;
+  carrusel.appendChild(prev);
+  carrusel.appendChild(next);
+  carrusel.appendChild(puntos);
 
   var visibles = 1;
   var paso = 0;
@@ -107,8 +100,6 @@
     prev.disabled = alInicio;
     next.disabled = alFinal;
     var indice = Math.round(pista.scrollLeft / paso);
-    // En celular se muestra "1 / 7" en lugar de los puntos.
-    contador.textContent = (alFinal ? slides.length : Math.min(slides.length, indice + 1)) + " / " + slides.length;
     var activo = alFinal ? paginas - 1 : Math.min(paginas - 1, Math.floor(indice / visibles));
     Array.prototype.forEach.call(puntos.children, function (d, i) {
       if (i === activo) d.setAttribute("aria-current", "true");
