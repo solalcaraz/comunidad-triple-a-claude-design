@@ -18,9 +18,9 @@ https://cafe-raiz-especialidad.vercel.app
 
 ![Panel del pedido de la tienda en celular, con el total y el botón para enviarlo por WhatsApp](docs/tienda-pedido-celular.jpg)
 
-Todos los datos son de ejemplo: los productores (Don Aníbal, Doña Elvira y el resto), los precios, las condiciones de envío (gratis desde $45.000), el WhatsApp y el Instagram no existen. Nada se vende ni se entrega. La feria "Plaza Armenia, Palermo, sábados de 10 a 18 h" también es inventada, pero el mapa apunta a un lugar real (Armenia y Costa Rica, Palermo).
+Los datos son de ejemplo: productores, precios, envíos, WhatsApp, Instagram y la feria no existen, y nada se vende ni se entrega. El mapa marca un punto de Palermo que es solo genérico.
 
-Las fotos de las bolsas son maquetas generadas con IA, no productos reales, y sus etiquetas pueden traer defectos (corchetes o listas numeradas en algún texto). Las franjas de color de cada bolsa no son del manual de marca y viven solo dentro de las fotos. Las imágenes del hero, la tostadora, el trabajador y los granos son las que entregó la consigna, y no verifiqué su origen. Los 4 packs usan por ahora una foto genérica de packaging.
+Las fotos de las bolsas están generadas con IA a partir de la foto del packaging original que vino con la práctica. Los 4 packs usan por ahora una foto genérica.
 
 ## Tecnologías
 
@@ -42,7 +42,7 @@ Las decisiones que tomé y por qué:
 
 - **Un Design System con los datos de la marca, antes de diseñar.** Cargué la paleta, las tipografías y el tono del manual para diseñar en Claude Design siempre desde la misma base. Por eso la landing y la tienda se ven como la misma marca.
 - **Una plantilla elegida con un propósito.** Usé E-commerce Website porque su estructura (hero con una sola acción, productos con precio, origen, preguntas frecuentes y cierre con compra) es lo que necesitaba este caso. Tomé la estructura y no el estilo: el fondo claro y los colores salen del manual.
-- **Solo los 6 colores del manual.** Al medir los estilos de la tienda ya armada encontré 3 colores que no eran de la marca y los reemplacé por Leche y transparencias de Crema. Los títulos van en Playfair Display y los textos en Inter, y nunca uso la serif en párrafos largos, como pide el manual.
+- **Todo sale del Design System.** Los estilos y la estructura de las dos páginas siguen el Design System de la marca: los 6 colores del manual (al medir la tienda armada encontré 3 que no eran de la marca y los reemplacé por Leche y transparencias de Crema), Playfair Display en los títulos e Inter en los textos, y los mismos botones, tarjetas y rótulos en la landing y en la tienda.
 - **Tienda en una sola página, sin pestañas.** Los packs van primero y los cafés después, con filtros por tueste y por origen. El detalle de cada café abre en una ventana que se cierra con Esc.
 - **Sin pasarela de pagos ni servidor.** Es lo mínimo para armar un pedido legible. La tienda lo aclara desde la entrada ("Acá no se cobra") y en las preguntas de compra para que nadie busque un botón de pagar que no existe. Cobrar por la web quedaría para una segunda etapa.
 - **El botón de enviar se bloquea hasta que haya un producto y un nombre.** Antes de mandar, hay un botón para ver cómo llega el mensaje.
@@ -50,17 +50,10 @@ Las decisiones que tomé y por qué:
 - **Pensada para el celular.** Todo lo tocable mide al menos 44 px, los filtros que no entran se deslizan con una flecha y en el pack destacado el botón de agregar va debajo de la cantidad.
 - **Carga más liviana, a partir de Lighthouse.** Mostró que la imagen principal se cargaba tarde, que las fuentes de Google frenaban la primera pantalla y que los packs se armaban sin espacio reservado. Ahora la imagen principal carga primero, las fuentes no bloquean y el espacio de packs y cafés queda reservado.
 - **Vista previa al compartir el link y favicon.** Para que se vea bien en WhatsApp. El favicon es el isotipo sobre el color Espresso.
-- **Publicada desde el repo.** El proyecto de Vercel apunta a la carpeta `cafe-raiz`.
 
 ## Cómo correrlo
 
-Se ve en el link publicado: https://cafe-raiz-especialidad.vercel.app. Para verla local, desde la carpeta `cafe-raiz`:
-
-```
-python -m http.server 8770
-```
-
-Después abrí http://localhost:8770 para la landing o http://localhost:8770/tienda.html para la tienda.
+Se ve en el link publicado: https://cafe-raiz-especialidad.vercel.app.
 
 ## Qué aprendí y qué mejoraría
 

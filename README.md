@@ -10,16 +10,18 @@ Casos de práctica del módulo de Claude Design de la comunidad Triple A, en 202
 
 El segundo caso del módulo (Crudo) todavía no está en este repo.
 
-Los datos de contacto, los precios, los productores y la feria son de ejemplo, y las fotos de las bolsas son maquetas generadas. El README del caso lo aclara.
+Los datos son de ejemplo y las fotos de las bolsas están generadas con IA. El README del caso lo aclara.
 
 ## Cómo trabajé
 
-1. **Ordenar antes de diseñar.** Leía la consigna y el manual de marca, y definía el objetivo, la plantilla y por qué la elegía, las referencias, el cliente y la estructura de la página, antes de pedir algo.
-2. **Un Design System primero.** Armaba la base con los colores, las tipografías y el tono de la marca, para diseñar siempre desde lo mismo.
-3. **Diseñar en Claude Design y pasar el diseño a código.** Con un prompt aprobado por mí, Claude Design hacía el diseño y Claude Code lo llevaba a HTML, CSS y JavaScript.
-4. **Decidir yo.** Para cada decisión de diseño o de texto, Claude proponía opciones y yo elegía.
-5. **Verificar.** Probaba en el navegador y en celular simulado, repasaba los autochecks de la consigna y medía con Lighthouse.
-6. **Documentar.** Un README por caso, con las decisiones y qué mejoraría.
+Claude Design no dibuja una imagen de la web: construye la web de verdad, en HTML. Por eso lo usé para las páginas y las fotos de las bolsas las generé aparte. El método, en el orden del módulo:
+
+1. **Design System primero.** Cargué la paleta, las tipografías, los componentes y el tono de la marca, para que todo lo que diseñara saliera desde la misma base.
+2. **Preparar la landing en cinco pasos.** Objetivo (una sola acción), referencias como norte visual y no como copia, el cliente y sus objeciones, estructura por bloques aprobada antes de diseñar, y revisión bloque por bloque.
+3. **Un pedido con estructura.** Qué es, para quién es, cómo se ve y qué lleva adentro.
+4. **Prototipo y ajustes en ciclo.** El primer resultado era un punto de partida: lo pulía con vueltas cortas, señalando y comentando sobre el diseño.
+5. **Pasar el diseño a código.** El handoff a Claude Code, que lo convirtió en la web publicada en Vercel.
+6. **Verificar y documentar.** Probaba en el navegador y en celular simulado, repasaba los autochecks de la consigna, medía con Lighthouse y escribía un README por caso.
 
 ## Qué aprendí
 
