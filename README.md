@@ -12,11 +12,11 @@ Puntajes de Performance de Lighthouse, medidos en modo celular con Chrome sobre 
 
 El segundo caso del módulo (Crudo) todavía no está en este repo.
 
-Los datos son de ejemplo y las fotos de las bolsas están generadas con IA. El README del caso lo aclara.
+Los datos son de ejemplo y las fotos de las bolsas están generadas con IA (Gemini). El README del caso lo aclara.
 
 ## Cómo trabajé
 
-Claude Design no dibuja una imagen de la web: construye la web de verdad, en HTML. Por eso lo usé para las páginas y las fotos de las bolsas las generé aparte. El método, en el orden del módulo:
+Claude Design no dibuja una imagen de la web: construye la web de verdad, en HTML. Por eso lo usé para las páginas y las fotos de las bolsas las generé aparte, con Gemini. El método, en el orden del módulo:
 
 1. **Design System primero.** Cargué la paleta, las tipografías, los componentes y el tono de la marca, para que todo lo que diseñara saliera desde la misma base.
 2. **Preparar la landing en cinco pasos.** Objetivo (una sola acción), referencias como norte visual y no como copia, el cliente y sus objeciones, estructura por bloques aprobada antes de diseñar, y revisión bloque por bloque.

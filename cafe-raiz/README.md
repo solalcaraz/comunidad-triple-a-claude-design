@@ -20,7 +20,7 @@ https://cafe-raiz-especialidad.vercel.app
 
 Los datos son de ejemplo: productores, precios, envíos, WhatsApp, Instagram y la feria no existen, y nada se vende ni se entrega. El mapa marca un punto de Palermo que es solo genérico.
 
-Las fotos de las bolsas están generadas con IA a partir de la foto del packaging original que vino con la práctica. Los 4 packs usan por ahora una foto genérica.
+Las fotos de las bolsas y de los packs están generadas con IA (Gemini) a partir de la foto del packaging original que vino con la práctica.
 
 ## Tecnologías
 
@@ -68,6 +68,6 @@ Se ve en el link publicado: https://cafe-raiz-especialidad.vercel.app.
 
 **Qué mejoraría**
 
-- Generar fotos propias para los 4 packs y revisar las etiquetas de las bolsas.
+- Revisar las etiquetas de las bolsas, que traen algunos defectos del generador de imágenes.
 - Reemplazar los datos de ejemplo (WhatsApp, Instagram, feria) por los reales si el negocio fuera de verdad.
 - Sumar pagos en línea y control de stock.

@@ -158,7 +158,7 @@ button.gbtn { border: 0; cursor: pointer; font: inherit; }
 .pack-slides::-webkit-scrollbar { display: none; }
 .pack-slides > li { flex: 0 0 calc((100% - 32px) / 2); scroll-snap-align: start; display: flex; }
 .pack-slides .ph { aspect-ratio: auto; height: 170px; }
-.pack-area .car-btn { top: 50%; }
+.pack-area .car-btn { top: 89px; } /* centradas con la foto (170 px + 4 px de margen) */
 .pack-area .pack-prev { left: -6px; }
 .pack-area .pack-next { right: -6px; }
 .pack-slides:focus-visible { outline-offset: -3px; border-radius: var(--radius-xl); }

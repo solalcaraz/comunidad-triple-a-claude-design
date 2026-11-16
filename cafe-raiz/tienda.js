@@ -27,7 +27,7 @@
 
   var PACKS = [
     { id: "degustacion", name: "Pack Degustación", rotulo: "Para probar", lema: "Probá sin elegir.", desc: "3 bolsas de 100 g: Don Aníbal, Doña Elvira y Familia Silveira.", precio: 19900, aparte: 0 },
-    { id: "desayuno", name: "Pack Desayuno", rotulo: "Para el desayuno", lema: "Cafés suaves, para tomar con leche.", desc: "Blend de la casa y Don Aníbal, 250 g cada uno.", precio: 27900, aparte: 29400 },
+    { id: "desayuno", name: "Pack Desayuno", rotulo: "Para el desayuno", lema: "Cafés suaves, para tomar con leche.", desc: "Descafeinado de la casa y Don Aníbal, 250 g cada uno.", precio: 27900, aparte: 32700 },
     { id: "sobremesa", name: "Pack Sobremesa", rotulo: "Para la sobremesa", lema: "Cafés oscuros, para después de comer.", desc: "Don Julián y Familia Silveira, 250 g cada uno.", precio: 27900, aparte: 29700 },
     { id: "regalo", name: "Pack Regalo", rotulo: "Para regalar", lema: "Listo para dar.", desc: "Don Aníbal y Doña Elvira, 250 g cada uno, en caja kraft con tarjeta.", precio: 31900, aparte: "$32.000 más la caja" }
   ];
@@ -228,7 +228,7 @@
       '<button class="qb" type="button" data-mas aria-label="Sumar uno">+</button></div>';
     var boton = '<button class="gbtn block" type="button" data-agregar-pack><span class="gin">Agregar al pedido</span></button>';
     return '<article class="card' + (grande ? " grande" : "") + '" data-pack="' + p.id + '" aria-label="' + esc(p.name) + '">' +
-      '<div class="ph"><img src="img/packaging.jpg" alt="Bolsas de café Café Raíz" ' + (grande ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"') + '></div>' +
+      '<div class="ph"><img src="img/packaging-pack-' + p.id + '.jpg" alt="' + esc(p.name) + ': bolsas de café Café Raíz" ' + (grande ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"') + '></div>' +
       '<div class="body">' +
       '<div class="eb">' + esc(p.rotulo) + '</div>' +
       '<h3 class="h3">' + esc(p.name) + '</h3>' +
