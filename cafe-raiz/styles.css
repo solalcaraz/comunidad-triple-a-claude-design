@@ -82,7 +82,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 .brand { display: block; width: 72px; height: 72px; }
 .brand img { display: block; width: 72px; height: 72px; mix-blend-mode: darken; }
 .nav { display: flex; align-items: center; gap: 40px; }
-.nav a { font-size: 16px; font-weight: 500; color: var(--espresso); }
+.nav a { font-size: 16px; font-weight: 500; color: var(--espresso); padding: 9px 0; }
 .nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 .header-actions { display: flex; align-items: center; gap: 8px; }
 .menu-btn {
