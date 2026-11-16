@@ -131,6 +131,36 @@
     $("#limpiar").hidden = !(filtros.tueste.length || filtros.origen.length);
   }
 
+  // Flechas para deslizar los filtros cuando no entran todos (celular).
+  var FLECHA = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+  $$(".chips").forEach(function (chips) {
+    var wrap = document.createElement("div");
+    wrap.className = "chips-wrap";
+    chips.parentNode.insertBefore(wrap, chips);
+    wrap.appendChild(chips);
+    var ant = document.createElement("button"), sig = document.createElement("button");
+    ant.type = sig.type = "button";
+    ant.className = "chips-flecha chips-ant"; sig.className = "chips-flecha chips-sig";
+    ant.setAttribute("aria-label", "Ver filtros anteriores"); sig.setAttribute("aria-label", "Ver más filtros");
+    ant.innerHTML = FLECHA; sig.innerHTML = FLECHA;
+    wrap.appendChild(ant); wrap.appendChild(sig);
+    function actualizar() {
+      var max = chips.scrollWidth - chips.clientWidth;
+      ant.hidden = chips.scrollLeft < 4;
+      sig.hidden = max < 4 || chips.scrollLeft > max - 4;
+    }
+    function mover(dir) {
+      var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      chips.scrollBy({ left: dir * chips.clientWidth * 0.7, behavior: reducido ? "auto" : "smooth" });
+    }
+    ant.addEventListener("click", function () { mover(-1); });
+    sig.addEventListener("click", function () { mover(1); });
+    chips.addEventListener("scroll", actualizar, { passive: true });
+    window.addEventListener("resize", actualizar);
+    actualizar();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(actualizar);
+  });
+
   $$(".chip").forEach(function (chip) {
     chip.addEventListener("click", function () {
       var lista = filtros[chip.dataset.grupo];
@@ -198,7 +228,7 @@
       '<button class="qb" type="button" data-mas aria-label="Sumar uno">+</button></div>';
     var boton = '<button class="gbtn block" type="button" data-agregar-pack><span class="gin">Agregar al pedido</span></button>';
     return '<article class="card' + (grande ? " grande" : "") + '" data-pack="' + p.id + '" aria-label="' + esc(p.name) + '">' +
-      '<div class="ph"><img src="img/packaging.jpg" alt="Bolsas de café Café Raíz" loading="lazy"></div>' +
+      '<div class="ph"><img src="img/packaging.jpg" alt="Bolsas de café Café Raíz" ' + (grande ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"') + '></div>' +
       '<div class="body">' +
       '<div class="eb">' + esc(p.rotulo) + '</div>' +
       '<h3 class="h3">' + esc(p.name) + '</h3>' +

@@ -58,6 +58,17 @@ button.gbtn { border: 0; cursor: pointer; font: inherit; }
 .fgrupo { display: flex; align-items: center; gap: 8px; }
 .flab { width: 72px; flex: none; font-weight: 600; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips-wrap { position: relative; min-width: 0; }
+.chips-flecha {
+  position: absolute; top: 0; width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--crema); border-radius: 50%; background: var(--leche); color: var(--espresso);
+  box-shadow: var(--sombra-hover); cursor: pointer;
+}
+.chips-flecha[hidden] { display: none; }
+.chips-flecha:hover { background: var(--crema); }
+.chips-sig { right: 0; }
+.chips-ant { left: 0; }
+.chips-ant svg { transform: scaleX(-1); }
 .chip {
   height: 44px; padding: 0 16px; border-radius: var(--radius-sm); border: 1px solid rgba(111, 74, 47, 0.5);
   background: transparent; color: var(--carbon); font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap;
@@ -125,6 +136,11 @@ button.gbtn { border: 0; cursor: pointer; font: inherit; }
 .qb:hover { background: rgba(217, 195, 165, 0.4); }
 .pack-fila { display: flex; align-items: center; gap: 12px; }
 .pack-fila .gbtn { flex: 1; }
+@media (max-width: 900px) {
+  .pack-fila { flex-direction: column; align-items: stretch; gap: 12px; }
+  .pack-fila .cantidad { justify-content: flex-start; }
+  .pack-fila .gbtn { flex: none; width: 100%; }
+}
 
 /* Pack grande + carrusel */
 .packs-wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: stretch; }
@@ -291,4 +307,14 @@ button.gbtn { border: 0; cursor: pointer; font: inherit; }
   .cscroll { padding: 4px 16px 24px; }
   .cfoot { padding: 12px 16px calc(14px + env(safe-area-inset-bottom)); gap: 8px; }
   .cnota-pago { display: none; } /* en celular el panel ya ocupa casi todo: el aviso de pago queda en el botón y en la entrada */
+}
+
+/* Espacio reservado mientras el JS arma los packs y los cafés, para que el resto de la página no salte (CLS). */
+#packs-wrap:empty { min-height: 760px; }
+#grid:empty { min-height: 1700px; }
+@media (max-width: 1100px) {
+  #packs-wrap:empty { min-height: 1450px; }
+}
+@media (max-width: 900px) {
+  #grid:empty { min-height: 7500px; }
 }
