@@ -475,15 +475,15 @@ details[open] .qi::after{transform:rotate(90deg)}
 
 <script>
 (function(){
-  /* Cuenta regresiva: el drop cierra 7 días después de la primera visita.
+  /* Cuenta regresiva DEMO: el drop cierra 7 días después de la primera visita y, al llegar a cero, vuelve a empezar con 7 días (ciclos de 7 días desde esa primera visita).
      La fecha de la primera visita se guarda en el navegador; si no se puede guardar, cuenta desde ahora. */
   var KEY='crudo_primera_visita',t0=Date.now();
   try{var s=parseInt(localStorage.getItem(KEY),10);if(s)t0=s;else localStorage.setItem(KEY,String(t0));}catch(e){}
-  var end=t0+7*864e5,els={};
+  var CICLO=7*864e5,els={};
   ['d','h','m','s'].forEach(function(k){els[k]=document.querySelectorAll('[data-cd="'+k+'"]')});
   function p(n){return String(n).padStart(2,'0')}
   function tick(){
-    var s=Math.max(0,Math.floor((end-Date.now())/1000));
+    var s=Math.floor((CICLO-(((Date.now()-t0)%CICLO)+CICLO)%CICLO-1)/1000);
     var v={d:p(Math.floor(s/86400)),h:p(Math.floor(s%86400/3600)),m:p(Math.floor(s%3600/60)),s:p(s%60)};
     for(var k in v)els[k].forEach(function(e){e.textContent=v[k]});
   }

@@ -836,11 +836,11 @@ main{padding-bottom:0}
   /* ---------- cuenta regresiva: misma clave que la landing ---------- */
   var KEY='crudo_primera_visita',t0=Date.now();
   try{var s=parseInt(localStorage.getItem(KEY),10);if(s)t0=s;else localStorage.setItem(KEY,String(t0));}catch(e){}
-  var end=t0+7*864e5,els={};
+  var CICLO=7*864e5,els={};
   ['d','h','m','s'].forEach(function(k){els[k]=document.querySelectorAll('[data-cd="'+k+'"]')});
   function p2(x){return String(x).padStart(2,'0')}
   function tick(){
-    var s=Math.max(0,Math.floor((end-Date.now())/1000));
+    var s=Math.floor((CICLO-(((Date.now()-t0)%CICLO)+CICLO)%CICLO-1)/1000);
     var v={d:p2(Math.floor(s/86400)),h:p2(Math.floor(s%86400/3600)),m:p2(Math.floor(s%3600/60)),s:p2(s%60)};
     for(var k in v)els[k].forEach(function(e){e.textContent=v[k]});
   }
