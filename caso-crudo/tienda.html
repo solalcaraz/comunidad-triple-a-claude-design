@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRUDO — Tienda. Armá tu pedido.</title>
+<meta name="description" content="Tienda de CRUDO. Elegí prenda y talle, armá tu pedido y pagá. Tirada limitada.">
+<meta name="theme-color" content="#0E0E0E">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="CRUDO — Tienda. Armá tu pedido.">
+<meta property="og:description" content="Tienda de CRUDO. Elegí prenda y talle, armá tu pedido y pagá. Tirada limitada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js'</script>
+<style>
+:root{
+  --negro:#0E0E0E;--asfalto:#1C1C1C;--hueso:#EDEDED;--volt:#D6FF00;--gris-humo:#8A8A8A;--rojo-alerta:#FF3B2F;
+  --font-display:'Anton','Archivo Black',Impact,sans-serif;
+  --font-sans:'Inter',Helvetica,Arial,sans-serif;
+  --font-mono:'Courier Prime','Courier New',Courier,monospace;
+  --pad-x:16px;--pad-y:80px;--header-h:0px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--negro)}
+body{margin:0;background:var(--negro);color:var(--hueso);font-family:var(--font-sans);font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--hueso);outline-offset:3px}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--volt);color:var(--negro);padding:12px 16px;font-family:var(--font-mono);font-weight:700;text-transform:uppercase;text-decoration:none}
+.skip:focus{top:8px}
+
+/* ---------- botones (igual que la landing) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:20px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid transparent;border-radius:0;cursor:pointer;transition:transform .12s ease,background-color .12s ease,color .12s ease;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:translateY(2px)}
+.btn__arrow{display:inline-block;transition:transform .15s ease}
+.btn:hover .btn__arrow{transform:translateX(6px)}
+.btn--primary{background:var(--volt);color:var(--negro)}
+.btn--block{display:flex;width:100%}
+
+/* ---------- 1. ticker + encabezado ---------- */
+.site-header{position:relative;z-index:30;background:var(--negro)}
+.ticker{height:36px;overflow:hidden;background:var(--asfalto);display:flex;align-items:center}
+.ticker__track{display:flex;flex:none;white-space:nowrap;font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--hueso);animation:ticker 30s linear infinite}
+.ticker__seg{padding-right:12px}
+.ticker__seg b{font-weight:400;color:var(--rojo-alerta)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.bar{display:flex;flex-direction:column}
+.bar__top{display:flex;align-items:flex-start;justify-content:space-between;padding-right:8px}
+.logo{display:block;padding:20px var(--pad-x) 4px}
+.logo img{width:280px}
+.nav{display:flex;gap:24px;padding:0 var(--pad-x) 8px}
+.nav a{display:flex;align-items:center;min-height:48px;min-width:44px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.nav a:hover{text-decoration:underline;text-underline-offset:6px}
+.nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
+
+/* carrito: ícono + contador */
+.cart{display:inline-flex;align-items:center;gap:8px;min-width:48px;min-height:48px;margin-top:12px;padding:0 8px;background:transparent;border:0;border-radius:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cart svg{flex:none;width:28px;height:28px;stroke:var(--hueso);fill:none;stroke-width:2;stroke-linejoin:miter;stroke-linecap:square}
+.cart__n{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;background:var(--hueso);color:var(--negro);font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:20px;border-radius:2px;font-variant-numeric:tabular-nums}
+.cart__n.jump{animation:jump .36s cubic-bezier(.3,1.6,.5,1)}
+@keyframes jump{0%{transform:translateY(0)}40%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.bar .btn--header{display:none}
+
+/* barra de compra fija (celular) */
+.buy-bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:16px;background:var(--negro);border-top:1px solid var(--asfalto)}
+.buy-bar .btn{justify-content:space-between;width:100%;padding:0 20px}
+.buy-bar__tot{font-variant-numeric:tabular-nums}
+
+/* ---------- 2. entrada corta ---------- */
+.entry{border-bottom:1px solid var(--asfalto)}
+.entry__in{max-width:1280px;margin:0 auto;padding:32px var(--pad-x);display:flex;flex-direction:column;gap:24px}
+.entry__l{display:flex;flex-direction:column;gap:16px}
+.entry h1{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase;color:var(--hueso)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.steps li{display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid var(--gris-humo);font-size:14px;line-height:20px}
+.steps b{font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:20px;letter-spacing:.08em;color:var(--hueso)}
+.entry__r{display:flex;flex-direction:column;gap:20px}
+.cd-wrap{display:flex;flex-direction:column;gap:8px}
+.cd-label{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.08em;text-transform:uppercase}
+.cd{display:flex;align-items:flex-start;gap:6px;font-family:var(--font-mono)}
+.cd__u{display:flex;flex-direction:column;gap:4px}
+.cd__n{font-weight:700;font-size:32px;line-height:1;color:var(--volt);font-variant-numeric:tabular-nums}
+.cd__l{font-size:12px;line-height:16px;letter-spacing:.08em}
+.cd__s{font-weight:700;font-size:32px;line-height:1}
+.sold{display:flex;flex-direction:column;gap:12px}
+.sold__row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono)}
+.sold__big{font-weight:700;font-size:18px;line-height:24px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.sold__pct{font-size:14px;line-height:20px;letter-spacing:.08em;color:var(--gris-humo)}
+.sold__track{height:12px;background:var(--asfalto)}
+.sold__fill{height:100%;width:75.5%;background:var(--volt);transition:width .6s ease}
+.entry__note{font-size:14px;line-height:20px;color:var(--gris-humo)}
+
+/* ---------- 3. el drop ---------- */
+.wrap{padding:56px var(--pad-x) 40px;max-width:1280px;margin:0 auto}
+.kicker{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+.h2{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase;color:var(--hueso)}
+.drop-head{display:flex;flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:32px}
+.drop-head p{font-size:18px;line-height:28px}
+
+.filters{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.tabs{display:flex;gap:20px;flex-wrap:wrap}
+.tab{min-height:48px;min-width:44px;padding:0;background:none;border:0;border-radius:0;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris-humo);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tab:hover{color:var(--hueso)}
+.tab[aria-pressed="true"]{color:var(--hueso);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
+.filters__r{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--asfalto);padding-top:8px}
+.sw{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:0;background:none;border:0;cursor:pointer;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--hueso);-webkit-tap-highlight-color:transparent}
+.sw__track{position:relative;flex:none;width:48px;height:28px;border:2px solid var(--hueso);background:transparent;transition:background-color .15s}
+.sw__thumb{position:absolute;top:2px;left:2px;width:20px;height:20px;background:var(--hueso);transition:transform .15s,background-color .15s}
+.sw[aria-checked="true"] .sw__track{background:var(--hueso)}
+.sw[aria-checked="true"] .sw__thumb{transform:translateX(20px);background:var(--negro)}
+.count{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+
+.carwrap{position:relative;margin:0 calc(var(--pad-x) * -1)}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--pad-x);scroll-padding:0 var(--pad-x);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.car::-webkit-scrollbar{display:none}
+.car>.card{flex:0 0 min(82%,340px);scroll-snap-align:start}
+.arrow{position:absolute;z-index:3;top:var(--arrow-top,180px);width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--negro);border:2px solid var(--hueso);border-radius:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.arrow svg{width:20px;height:20px;stroke:var(--hueso);fill:none;stroke-width:2.5;stroke-linecap:square;stroke-linejoin:miter}
+.arrow--l{left:4px}.arrow--r{right:4px}
+.arrow[disabled]{opacity:.35;cursor:default}
+.dots{display:flex;justify-content:center;gap:0;margin-top:8px}
+.dot{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;padding:0;cursor:pointer}
+.dot i{display:block;width:12px;height:12px;background:var(--gris-humo)}
+.dot[aria-current="true"] i{background:var(--hueso)}
+
+/* tarjeta: marco fino (B) + talles en tira debajo de la foto (C) */
+.card{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid var(--gris-humo);background:var(--negro)}
+.card__top{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:48px;padding:0 16px}
+.cat{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-humo)}
+.tag{display:inline-flex;align-items:center;min-height:24px;padding:0 8px;font-family:var(--font-mono);font-weight:700;font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;border:1px solid transparent;border-radius:2px;white-space:nowrap}
+.tag--stock{background:var(--rojo-alerta);color:var(--negro)}
+.tag--soldout{background:var(--negro);color:var(--gris-humo);border-color:var(--gris-humo)}
+.media{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--negro)}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .media img{transform:scale(1.06)}
+.card--out .media img{filter:grayscale(1) contrast(1.05)}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--gris-humo);border-bottom:1px solid var(--gris-humo)}
+.strip.need{outline:3px solid var(--hueso);outline-offset:-3px}
+.sz{min-height:48px;background:transparent;border:0;border-right:1px solid var(--gris-humo);border-radius:0;color:var(--hueso);font-family:var(--font-mono);font-weight:700;font-size:14px;letter-spacing:.06em;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .12s,color .12s}
+.sz:last-child{border-right:0}
+.sz:hover{background:var(--asfalto)}
+.sz[aria-pressed="true"]{background:var(--hueso);color:var(--negro)}
+.sz[disabled]{color:var(--gris-humo);text-decoration:line-through;text-decoration-thickness:2px;cursor:not-allowed;background:transparent}
+.sz[disabled]:hover{background:transparent}
+.card__body{display:flex;flex-direction:column;gap:12px;padding:16px;flex:1}
+.card__row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card__name{font-family:var(--font-display);font-weight:400;font-size:28px;line-height:1;text-transform:uppercase}
+.card__price{font-family:var(--font-mono);font-weight:700;font-size:16px;line-height:24px;white-space:nowrap}
+.hint{min-height:20px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.04em;color:var(--hueso)}
+.card__cta{margin-top:auto;display:flex;flex-direction:column;gap:4px}
+.btn--add{width:100%;background:transparent;border-color:var(--hueso);color:var(--hueso);padding:0 16px}
+.btn--add.is-ready{background:var(--volt);border-color:var(--volt);color:var(--negro)}
+.btn--add.is-ok{background:var(--hueso);border-color:var(--hueso);color:var(--negro)}
+.btn--add[disabled]{background:var(--asfalto);border-color:var(--asfalto);color:var(--gris-humo);cursor:not-allowed}
+.btn--add[disabled]:active{transform:none}
+.more{display:inline-flex;align-items:center;align-self:flex-start;min-height:44px;font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--hueso);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px;background:none;border:0;padding:0;cursor:pointer}
+.more:hover{text-decoration-thickness:3px}
+.sizes-off{min-height:48px;display:flex;align-items:center;padding:0 16px;border-top:1px solid var(--gris-humo);border-bottom:1px solid var(--gris-humo);font-family:var(--font-mono);font-size:14px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+
+.empty{display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding:32px 16px;border:1px solid var(--gris-humo)}
+.empty h3{font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1;text-transform:uppercase}
+.empty p{font-size:16px}
+.btn--secondary{background:transparent;color:var(--hueso);border-color:var(--hueso)}
+.btn--secondary:hover{background:var(--hueso);color:var(--negro)}
+
+/* ---------- 4. bloques de categoría ---------- */
+section[id],#grilla{scroll-margin-top:calc(var(--header-h) + 16px)}
+.cats{display:flex;flex-direction:column}
+.blk{position:relative;display:block;overflow:hidden;container-type:size;height:min(100svh,640px);min-height:480px;background:var(--negro);text-decoration:none;color:var(--hueso)}
+.blk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.blk:hover img{transform:scale(1.05)}
+.blk__vt{position:absolute;z-index:2;left:5cqw;top:5cqh;writing-mode:vertical-lr;transform:rotate(180deg);font-family:var(--font-display);font-weight:400;text-transform:uppercase;line-height:.9;color:var(--hueso);font-size:min(19cqh,25cqw);transition:translate .3s}
+.blk:hover .blk__vt{translate:0 -2px}
+.blk__btn{position:absolute;z-index:2;left:5cqw;right:5cqw;bottom:5cqw;display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 24px;font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:20px;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--hueso);background:var(--negro);color:var(--hueso);border-radius:0;transition:background-color .12s,color .12s}
+.blk:hover .blk__btn{background:var(--hueso);color:var(--negro)}
+.blk:hover .btn__arrow{transform:translateX(6px)}
+.blk:active .blk__btn{transform:translateY(2px)}
+.blk:focus-visible{outline-offset:-6px}
+
+/* ---------- 5. ventana de detalle ---------- */
+.det{padding:0;border:0;margin:0;width:100%;max-width:none;height:100%;max-height:none;background:var(--negro);color:var(--hueso);overflow:hidden}
+.det::backdrop{background:rgba(14,14,14,.92)}
+html.det-open{overflow:hidden}
+.det__in{display:flex;flex-direction:column;height:100%}
+.det__bar{flex:none;display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 0 0 16px;border-bottom:1px solid var(--asfalto);background:var(--negro)}
+.det__x{display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:none;border:0;border-radius:0;cursor:pointer}
+.det__x svg{width:24px;height:24px;stroke:var(--hueso);fill:none;stroke-width:2.5;stroke-linecap:square}
+.det__body{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.det__media{position:relative;overflow:hidden;aspect-ratio:3/2;background:var(--negro);flex:none}
+.det__media img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
+.det__info{display:flex;flex-direction:column;gap:12px;padding:16px 16px 0;flex:1}
+.det__pr{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.det__name{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase}
+.det__price{font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:28px}
+.det__desc{font-size:16px;line-height:24px}
+.det__tirada{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+.det__sizes{display:flex;flex-direction:column;gap:8px}
+.det__lbl{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-humo)}
+.det__sizes .strip{border:1px solid var(--gris-humo)}
+.det__fit{font-size:14px;line-height:20px;color:var(--hueso)}
+.det__cta{position:sticky;bottom:0;margin:auto -16px 0;padding:16px;background:var(--negro);border-top:1px solid var(--asfalto);display:flex;flex-direction:column;gap:4px}
+
+
+/* ---------- 6. panel del pedido ---------- */
+.cp{padding:0;border:0;border-left:1px solid var(--gris-humo);margin:0 0 0 auto;width:min(92vw,440px);max-width:none;height:100%;max-height:none;background:var(--negro);color:var(--hueso);overflow:hidden}
+.cp::backdrop{background:rgba(14,14,14,.92)}
+.cp[open]{animation:cpin .25s ease}
+@keyframes cpin{from{transform:translateX(100%)}to{transform:none}}
+.cp:focus,.det:focus,.done:focus{outline:none}
+/* ---------- cartel de pago realizado ---------- */
+.done{padding:0;border:0;margin:0;width:100%;max-width:none;height:100%;max-height:none;background:var(--negro);color:var(--hueso);overflow:hidden}
+.done::backdrop{background:rgba(14,14,14,.92)}
+.done__in{display:flex;flex-direction:column;gap:20px;height:100%;overflow-y:auto;padding:24px 16px 32px}
+.done__num{font-family:var(--font-mono);font-weight:700;font-size:16px;line-height:24px;letter-spacing:.08em;color:var(--volt)}
+.done h2{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.9;text-transform:uppercase}
+.done__lead{font-size:18px;line-height:28px}
+.done__list{list-style:none;margin:0;padding:0;border-top:1px solid var(--gris-humo)}
+.done__list li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--asfalto);font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.04em;text-transform:uppercase}
+.done__list li span:last-child{white-space:nowrap;font-weight:700}
+.done__sum{display:flex;flex-direction:column;gap:4px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.04em;text-transform:uppercase}
+.done__sum div{display:flex;justify-content:space-between;gap:12px}
+.done__sum .t{font-weight:700;font-size:16px;padding-top:8px;border-top:1px solid var(--gris-humo);margin-top:4px}
+.done__note{font-size:14px;line-height:20px;color:var(--gris-humo)}
+.done__btns{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.cp__in{display:flex;flex-direction:column;height:100%}
+.cp__h{flex:none;display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 0 0 16px;border-bottom:1px solid var(--asfalto)}
+.cp__ti{font-family:var(--font-display);font-weight:400;font-size:28px;line-height:1;text-transform:uppercase}
+.cp__ti span{font-family:var(--font-mono);font-size:14px;color:var(--gris-humo);margin-left:8px}
+.cp__b{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:12px}
+.cp__ln{position:relative;display:grid;grid-template-columns:80px 1fr;gap:12px;padding:12px;background:var(--asfalto)}
+.cp__ln img{width:80px;height:80px;object-fit:cover}
+.cp__nm{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1;text-transform:uppercase;padding-right:40px}
+.cp__meta{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+.cp__r{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+.cp__sub{font-family:var(--font-mono);font-weight:700;font-size:16px;line-height:24px;white-space:nowrap}
+.cp__rm{position:absolute;top:0;right:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:0;cursor:pointer}
+.cp__rm svg{width:18px;height:18px;stroke:var(--hueso);fill:none;stroke-width:2.5;stroke-linecap:square}
+.step{display:inline-flex;align-items:center}
+.step button{width:44px;height:44px;background:transparent;border:1px solid var(--gris-humo);border-radius:0;font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:1;cursor:pointer}
+.step button:hover:not([disabled]){border-color:var(--hueso)}
+.step button[disabled]{color:var(--gris-humo);border-color:var(--asfalto);cursor:not-allowed}
+.step output{display:flex;align-items:center;justify-content:center;min-width:44px;height:44px;border-top:1px solid var(--gris-humo);border-bottom:1px solid var(--gris-humo);font-family:var(--font-mono);font-weight:700;font-size:16px}
+.cp__f{flex:none;padding:16px;border-top:1px solid var(--asfalto);display:flex;flex-direction:column;gap:12px;background:var(--negro)}
+.cp__ship{display:flex;flex-direction:column;gap:8px}
+.cp__ship p{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.04em;text-transform:uppercase}
+.cp__track{height:8px;background:var(--asfalto)}
+.cp__track i{display:block;height:100%;background:var(--hueso);transition:width .3s ease}
+.cp__tot{display:flex;justify-content:space-between;align-items:baseline}
+.cp__tot .l{font-family:var(--font-mono);font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.cp__tot .v{font-family:var(--font-display);font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.cp__go{width:100%}
+.cp__empty{display:flex;flex-direction:column;gap:16px;align-items:flex-start;justify-content:center;flex:1;padding:12px}
+.cp__empty h3{font-family:var(--font-display);font-weight:400;font-size:40px;line-height:.95;text-transform:uppercase}
+
+@media (hover:hover) and (min-width:900px){.det__media:hover img{transform:scale(1.8)}}
+
+/* ---------- 8. preguntas de compra ---------- */
+.faq{display:flex;flex-direction:column;gap:32px}
+.faq__list{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--asfalto)}
+.faq summary{list-style:none;cursor:pointer;min-height:56px;padding:20px;display:flex;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq__q{flex:1;font-family:var(--font-display);font-size:28px;line-height:1.05;text-transform:uppercase;display:block}
+.faq__a{padding:0 20px 24px;font-size:18px;line-height:28px;max-width:760px}
+.qi{flex:none;width:24px;height:24px;position:relative}
+.qi::before,.qi::after{content:"";position:absolute;left:50%;top:50%;background:var(--hueso);transition:transform .25s ease}
+.qi::before{width:18px;height:2px;margin:-1px 0 0 -9px}
+.qi::after{width:2px;height:18px;margin:-9px 0 0 -1px}
+details[open] .qi::after{transform:rotate(90deg)}
+.faq summary:focus-visible{outline-color:var(--volt);outline-offset:2px}
+
+/* ---------- 9. última llamada + pie ---------- */
+.close{position:relative;overflow:hidden;background:var(--negro)}
+.close__bg{position:absolute;inset:0}
+.close__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.close__bg::after{content:"";position:absolute;inset:0;background:rgba(14,14,14,.78)}
+.close__in{position:relative;display:flex;flex-direction:column;gap:32px}
+.close__row{display:flex;flex-direction:column;gap:32px}
+.close__logo{width:100%}
+.close__title{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase}
+.close__cta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.close__cta .btn{width:100%}
+.close__cd{font-family:var(--font-mono);font-size:14px;line-height:24px;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums;margin-bottom:8px}
+.close__cd span{color:var(--volt);font-weight:700}
+.close__ig{display:inline-flex;align-items:center;min-height:48px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px}
+.foot{padding:48px var(--pad-x) 120px;max-width:1280px;margin:0 auto}
+.foot__card{background:var(--asfalto);padding:24px;display:flex;flex-direction:column;gap:24px}
+.foot__main{display:flex;flex-direction:column;gap:24px}
+.foot__logo{width:240px}
+.foot__link{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:12px 0;border-top:1px solid var(--negro);font-family:var(--font-display);font-size:32px;line-height:1;text-transform:uppercase;text-decoration:none}
+.foot__link:hover span{transform:translateX(6px)}
+.foot__link span{transition:transform .15s ease}
+.foot__copy{font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--gris-humo)}
+
+main{padding-bottom:0}
+
+/* ---------- SOLO BORRADOR: se saca después ---------- */
+.ph{margin:16px 16px 140px;min-height:480px;background:var(--asfalto);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:14px;color:var(--gris-humo);text-transform:uppercase;letter-spacing:.08em;text-align:center;padding:24px}
+
+/* ---------- compu ---------- */
+@media (min-width:900px){
+  :root{--pad-x:48px;--pad-y:128px}
+  .site-header{position:sticky;top:0}
+  .bar{flex-direction:row;align-items:center;gap:48px;padding:16px 32px;border-bottom:1px solid var(--asfalto)}
+  .bar__top{display:contents}
+  .logo{padding:0;order:0}.logo img{width:240px}
+  .nav{order:1;padding:0;gap:32px;flex:1}
+  .cart{order:2;margin-top:0;flex:none}
+  .bar .btn--header{order:3;display:inline-flex;flex:none}
+  .buy-bar{display:none}
+  .ph{margin-bottom:48px}
+  .entry__in{padding:40px var(--pad-x);display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end}
+  .entry h1{font-size:80px}
+  .steps{gap:24px}
+  .steps li{font-size:16px;line-height:24px;padding-top:16px}
+  .steps b{font-size:16px}
+  .entry__r{gap:24px}
+  .cd{gap:12px}.cd__n,.cd__s{font-size:48px}
+  .entry__note{grid-column:1/-1}
+  .wrap{padding:96px var(--pad-x) 64px}
+  .h2{font-size:64px}
+  .filters{flex-direction:row;align-items:center;justify-content:space-between;gap:32px}
+  .filters__r{border-top:0;padding-top:0;gap:32px}
+  .tabs{gap:32px}
+  .carwrap{margin:0}
+  .car{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;overflow:visible;padding:0;scroll-snap-type:none}
+  .car>.card{flex:none}
+  .arrow,.dots{display:none}
+  .done{margin:auto;width:min(560px,92vw);height:auto;max-height:90vh;border:1px solid var(--gris-humo)}
+  .done__in{padding:40px 40px 40px;max-height:90vh}
+  .done h2{font-size:80px}
+  .det{margin:auto;width:min(1040px,92vw);height:auto;max-height:90vh;border:1px solid var(--gris-humo)}
+  .det__in{max-height:90vh}
+  .det__body{flex-direction:row;overflow:hidden}
+  .det__media{flex:0 0 52%;aspect-ratio:auto;min-height:520px;cursor:zoom-in}
+  .det__info{padding:32px 32px 0;overflow-y:auto}
+  .det__cta{margin:auto -32px 0;padding:16px 32px}
+  .det__name{font-size:56px}
+  .faq{gap:48px}
+  .faq__list{gap:12px}
+  .faq summary{padding:28px 32px}
+  .faq__q{font-size:36px}
+  .faq__a{padding:0 32px 32px}
+  .close__in{gap:48px}
+  .close__title{font-size:80px}
+  .close__row{flex-direction:row;justify-content:space-between;align-items:flex-end;gap:48px;flex-wrap:wrap}
+  .close__cta{min-width:380px}
+  .close__cd{font-size:18px}
+  .foot{padding:80px 48px}
+  .foot__card{padding:48px;gap:48px}
+  .foot__main{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .foot__logo{width:320px}
+  .foot__link{font-size:40px;padding:16px 0}
+  .cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .blk{height:clamp(560px,52vw,750px)}
+  .blk__btn{left:10cqw;right:10cqw}
+  .blk__vt{font-size:min(19cqh,28cqw)}
+  main{padding-bottom:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker__track{animation:none}
+  .btn,.btn__arrow{transition:none!important}
+  .btn:hover .btn__arrow{transform:none!important}
+  .cart__n.jump{animation:none}
+  .sold__fill{transition:none}
+  .det__media img{transition:none!important}
+  .cp[open]{animation:none}
+  .qi::before,.qi::after,.foot__link span{transition:none!important}
+  .foot__link:hover span{transform:none!important}
+  .cp__track i{transition:none}
+  .det__media:hover img{transform:none!important}
+  .media img,.sz,.sw__track,.sw__thumb,.blk img,.blk__vt,.blk__btn{transition:none!important}
+  .blk:hover img,.blk:hover .blk__vt,.blk:hover .btn__arrow{transform:none!important;translate:none!important}
+  .card:hover .media img{transform:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#pedido-contenido">Ir a la tienda</a>
+
+<!-- 1 · TICKER + ENCABEZADO (mismo que la landing; "Tienda" activo; carrito con contador) -->
+<header class="site-header" id="top">
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+    </div>
+  </div>
+  <div class="bar">
+    <div class="bar__top">
+      <a class="logo" href="index.html" aria-label="CRUDO, ir al inicio"><img src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449"></a>
+      <button class="cart" type="button" data-open-cart aria-label="Ver pedido, 0 prendas">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 9h18l-1.5 15h-15z"/><path d="M10 9V7a4 4 0 0 1 8 0v2"/></svg>
+        <span class="cart__n" data-cart-count aria-hidden="true">0</span>
+      </button>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#drop">Drop</a><a href="index.html#quienes">Quiénes</a><a href="index.html#preguntas">Preguntas</a><a href="tienda.html" aria-current="page">Tienda</a>
+    </nav>
+    <button class="btn btn--primary btn--header" type="button" data-open-cart>Ver pedido <span class="btn__arrow" aria-hidden="true">→</span></button>
+  </div>
+</header>
+
+<main id="pedido-contenido">
+  <!-- 2 · ENTRADA CORTA (una franja) -->
+  <section class="entry" aria-labelledby="entry-t">
+    <div class="entry__in">
+      <div class="entry__l">
+        <h1 id="entry-t">Armá tu pedido.</h1>
+        <ol class="steps">
+          <li><b>1</b><span>Elegí prenda y talle.</span></li>
+          <li><b>2</b><span>Revisá tu pedido.</span></li>
+          <li><b>3</b><span>Pagá y listo.</span></li>
+        </ol>
+      </div>
+      <div class="entry__r">
+        <div class="cd-wrap">
+          <span class="cd-label">Cierra el drop en</span>
+          <div class="cd" role="timer" aria-label="Tiempo que queda del drop">
+            <div class="cd__u"><span class="cd__n" data-cd="d">06</span><span class="cd__l">DÍAS</span></div><span class="cd__s">:</span>
+            <div class="cd__u"><span class="cd__n" data-cd="h">23</span><span class="cd__l">HORAS</span></div><span class="cd__s">:</span>
+            <div class="cd__u"><span class="cd__n" data-cd="m">59</span><span class="cd__l">MIN</span></div><span class="cd__s">:</span>
+            <div class="cd__u"><span class="cd__n" data-cd="s">59</span><span class="cd__l">SEG</span></div>
+          </div>
+        </div>
+        <div class="sold">
+          <div class="sold__row"><span class="sold__big" data-sold-label>302 / 400 VENDIDAS</span><span class="sold__pct" data-sold-pct>75%</span></div>
+          <div class="sold__track" role="img" data-sold-track aria-label="302 de 400 vendidas"><div class="sold__fill" data-sold-fill></div></div>
+        </div>
+      </div>
+      <p class="entry__note">Tienda de ejemplo: el pago es una simulación y no se cobra nada.</p>
+    </div>
+  </section>
+
+  <!-- 3 · EL DROP -->
+  <section id="drop" aria-labelledby="drop-t">
+    <div class="wrap">
+      <div class="drop-head">
+        <span class="kicker">DROP_01 / 25</span>
+        <h2 class="h2" id="drop-t">Lo que hay hoy.</h2>
+        <p>Mañana puede no estar.</p>
+      </div>
+
+      <div class="filters" id="grilla">
+        <div class="tabs" role="group" aria-label="Filtrar por tipo" id="tabs">
+          <button type="button" class="tab" aria-pressed="true" data-cat="Todo">Todo</button>
+          <button type="button" class="tab" aria-pressed="false" data-cat="Buzos">Buzos</button>
+          <button type="button" class="tab" aria-pressed="false" data-cat="Remeras">Remeras</button>
+          <button type="button" class="tab" aria-pressed="false" data-cat="Gorras">Gorras</button>
+        </div>
+        <div class="filters__r">
+          <button type="button" class="sw" role="switch" aria-checked="false" id="hide"><span class="sw__track" aria-hidden="true"><span class="sw__thumb"></span></span>Ocultar agotados</button>
+          <span class="count" id="count" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div class="carwrap" id="carwrap">
+        <button type="button" class="arrow arrow--l" id="prev" aria-label="Anterior"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 3 6 10l7 7"/></svg></button>
+        <div class="car" id="car" tabindex="-1"></div>
+        <button type="button" class="arrow arrow--r" id="next" aria-label="Siguiente"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3l7 7-7 7"/></svg></button>
+        <div class="dots" id="dots" role="group" aria-label="Páginas del carrusel"></div>
+      </div>
+      <div id="empty" hidden></div>
+    </div>
+  </section>
+
+  <!-- 4 · BLOQUES DE CATEGORÍA (tocar uno filtra la grilla y baja hasta ella) -->
+  <section class="cats" aria-labelledby="cats-t">
+    <h2 id="cats-t" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Categorías</h2>
+    <a class="blk" href="#grilla" data-cat="Buzos"><img src="assets/prod-buzo-sin-filtro.jpg" width="1000" height="800" loading="lazy" alt="Buzo negro CRUDO"><span class="blk__vt" aria-hidden="true">Buzos</span><span class="blk__btn">Ver buzos <span class="btn__arrow" aria-hidden="true">→</span></span></a>
+    <a class="blk" href="#grilla" data-cat="Remeras"><img src="assets/prod-remera-sin-poses-negra.jpg" width="1000" height="800" loading="lazy" alt="Remera negra CRUDO"><span class="blk__vt" aria-hidden="true">Remeras</span><span class="blk__btn">Ver remeras <span class="btn__arrow" aria-hidden="true">→</span></span></a>
+    <a class="blk" href="#grilla" data-cat="Gorras"><img src="assets/prod-gorra-sin-vueltas.jpg" width="1000" height="800" loading="lazy" alt="Gorra negra CRUDO"><span class="blk__vt" aria-hidden="true">Gorras</span><span class="blk__btn">Ver gorras <span class="btn__arrow" aria-hidden="true">→</span></span></a>
+  </section>
+
+  <!-- 5 · VENTANA DE DETALLE -->
+  <dialog class="det" id="det" tabindex="-1" aria-labelledby="det-name"><div class="det__in" id="det-in"></div></dialog>
+
+  <!-- 8 · PREGUNTAS DE COMPRA -->
+  <section id="preguntas" aria-labelledby="f-t">
+    <div class="wrap faq">
+      <div class="drop-head" style="margin-bottom:0">
+        <span class="kicker">PREGUNTAS DE COMPRA</span>
+        <h2 class="h2" id="f-t">Preguntas.</h2>
+      </div>
+      <div class="faq__list">
+        <details open><summary><span class="faq__q">¿Se cobra de verdad?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">No. Esta tienda es un caso de práctica: el pago es una simulación y no se cobra nada.</p></details>
+        <details><summary><span class="faq__q">¿Cuánto tarda y cuánto cuesta el envío?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Salimos a todo el país. Llega en 3 a 7 días hábiles. Cuesta $6.500 y es gratis desde $120.000.</p></details>
+        <details><summary><span class="faq__q">¿Cómo calzan los talles?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Buzo y remeras son oversize. Si querés el calce justo, pedí un talle menos.</p></details>
+        <details><summary><span class="faq__q">¿Puedo cambiar el talle?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Sí, dentro de los 10 días, con la prenda sin uso y con etiqueta.</p></details>
+        <details><summary><span class="faq__q">¿Se repone lo agotado?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">No. Cuando se agota, se agotó.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · ÚLTIMA LLAMADA -->
+  <section class="close" aria-labelledby="c-t">
+    <div class="close__bg" aria-hidden="true"><img src="assets/calle.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
+    <div class="wrap">
+      <div class="close__in">
+        <img class="close__logo" src="assets/crudo-logo-volt.png" alt="CRUDO" width="1371" height="449" loading="lazy">
+        <div class="close__row">
+          <h2 class="close__title" id="c-t">Última llamada.</h2>
+          <div class="close__cta">
+            <div class="close__cd" role="timer" aria-label="Tiempo que queda del drop">Cierra en <span data-cd="d">06</span> d / <span data-cd="h">23</span> h / <span data-cd="m">59</span> m / <span data-cd="s">59</span> s</div>
+            <button type="button" class="btn btn--primary" data-open-cart>Ver pedido <span class="btn__arrow" aria-hidden="true">→</span></button>
+            <a class="close__ig" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Seguinos en Instagram →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · PANEL DEL PEDIDO -->
+  <dialog class="cp" id="cp" tabindex="-1" aria-labelledby="cp-t"><div class="cp__in" id="cp-in"></div></dialog>
+
+  <!-- 7 · CARTEL DE PAGO REALIZADO (ejemplo) -->
+  <dialog class="done" id="done" tabindex="-1" aria-labelledby="done-t"><div class="done__in" id="done-in"></div></dialog>
+
+</main>
+
+<!-- PIE (el de la landing) -->
+<footer class="foot">
+  <div class="foot__card">
+    <div class="foot__main">
+      <img class="foot__logo" src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449" loading="lazy">
+      <div>
+        <a class="foot__link" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Instagram @crudo.ejemplo <span aria-hidden="true">→</span></a>
+        <a class="foot__link" href="tienda.html">Tienda <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <p class="foot__copy">© 2026 CRUDO. Marca ficticia de un caso de práctica.</p>
+  </div>
+</footer>
+
+<!-- barra de compra fija (celular): botón fijo + total siempre visible -->
+<div class="buy-bar"><button class="btn btn--primary" type="button" data-open-cart><span>Ver pedido (<span data-cart-count2>0</span>)</span><span class="buy-bar__tot" data-cart-total>$0</span></button></div>
+
+<script>
+(function(){
+  var fmt=function(v){return '$'+v.toLocaleString('es-AR')};
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  window.CRUDO=window.CRUDO||{};
+
+  /* ---------- datos de ejemplo ---------- */
+  var BASE=[
+    {id:'buzo',cat:'Buzos',name:'Buzo Sin Filtro',price:89900,total:100,sizes:{S:5,M:9,L:9,XL:0},desc:'Buzo oversize de algodón pesado. Estampa gastada al frente y etiqueta numerada en el borde.',fit:'Oversize. Si querés el calce justo, pedí un talle menos.',img:'assets/prod-buzo-sin-filtro.jpg',alt:'Buzo negro SIN FILTRO'},
+    {id:'remera-negra',cat:'Remeras',name:'Remera Sin Poses',price:42900,total:120,sizes:{S:8,M:12,L:10,XL:6},desc:'Remera oversize negra. Estampa CRUDO al frente y etiqueta numerada en el borde.',fit:'Oversize. Si querés el calce justo, pedí un talle menos.',img:'assets/prod-remera-sin-poses-negra.jpg',alt:'Remera negra SIN POSES'},
+    {id:'remera-hueso',cat:'Remeras',name:'Remera Hueso',price:42900,total:80,sizes:{S:0,M:0,L:0,XL:0},desc:'Remera oversize color hueso. Estampa negra al frente.',fit:'Oversize. Si querés el calce justo, pedí un talle menos.',img:'assets/prod-remera-hueso.jpg',alt:'Remera HUESO, agotada'},
+    {id:'gorra',cat:'Gorras',name:'Gorra Sin Vueltas',price:29900,total:100,sizes:{S:10,M:12,L:9,XL:8},desc:'Gorra de seis paneles con visera curva. Bordado CRUDO al frente.',fit:'Calce normal. Pedí tu talle de siempre.',img:'assets/prod-gorra-sin-vueltas.jpg',alt:'Gorra negra SIN VUELTAS'}
+  ];
+  var P=BASE.map(function(p){return Object.assign({},p,{sizes:Object.assign({},p.sizes)})});
+  function recalc(){P.forEach(function(p){p.stock=SIZES.reduce(function(a,k){return a+p.sizes[k]},0)})}
+  var SIZES=['S','M','L','XL'];
+  var sel={};          /* talle elegido por prenda */
+  var cart=[];         /* {id,size,qty} */
+  var cat='Todo',hide=false;
+  CRUDO.products=P;CRUDO.cart=cart;
+
+  function byId(id){return P.filter(function(p){return p.id===id})[0]}
+  function qtyOf(id,size){return cart.reduce(function(a,l){return l.id===id&&(!size||l.size===size)?a+l.qty:a},0)}
+  function cartCount(){return cart.reduce(function(a,l){return a+l.qty},0)}
+  function cartTotal(){return cart.reduce(function(a,l){return a+l.qty*byId(l.id).price},0)}
+  CRUDO.cartCount=cartCount;CRUDO.cartTotal=cartTotal;
+
+  /* ---------- carrito (contador del encabezado y barra fija) ---------- */
+  var cnt=document.querySelector('[data-cart-count]'),cnt2=document.querySelector('[data-cart-count2]'),tot=document.querySelector('[data-cart-total]'),cartBtn=document.querySelector('.cart');
+  function renderCart(bump){
+    var n=cartCount(),t=cartTotal();
+    cnt.textContent=n;cnt2.textContent=n;tot.textContent=fmt(t);
+    cartBtn.setAttribute('aria-label','Ver pedido, '+n+(n===1?' prenda':' prendas')+', total '+fmt(t));
+    if(bump&&!reduce){cnt.classList.remove('jump');void cnt.offsetWidth;cnt.classList.add('jump')}
+  }
+
+  /* ---------- barra de tirada (sale del stock real) ---------- */
+  CRUDO.renderSold=function(){
+    var total=P.reduce(function(a,p){return a+p.total},0),sold=P.reduce(function(a,p){return a+p.total-p.stock},0);
+    CRUDO.sold=sold;CRUDO.total=total;
+    document.querySelector('[data-sold-label]').textContent=sold+' / '+total+' VENDIDAS';
+    document.querySelector('[data-sold-pct]').textContent=Math.floor(sold/total*100)+'%';
+    document.querySelector('[data-sold-fill]').style.width=(sold/total*100)+'%';
+    document.querySelector('[data-sold-track]').setAttribute('aria-label',sold+' de '+total+' vendidas');
+  };
+
+  function addToCart(id){
+    var p=byId(id),z=sel[id];
+    if(!z)return 'need';
+    if(qtyOf(id,z)>=p.sizes[z])return 'max';
+    var line=cart.filter(function(l){return l.id===id&&l.size===z})[0];
+    if(line)line.qty++;else cart.push({id:id,size:z,qty:1});
+    renderCart(true);
+    return 'ok';
+  }
+
+  /* ---------- tarjetas ---------- */
+  var car=document.getElementById('car'),empty=document.getElementById('empty'),carwrap=document.getElementById('carwrap');
+  function btnState(p){
+    if(p.stock<=0)return {t:'Agotado',c:'',d:true};
+    var z=sel[p.id];
+    if(z&&p.sizes[z]<=0){sel[p.id]=z=null}
+    if(z&&qtyOf(p.id,z)>=p.sizes[z])return {t:'Ya tenés todas',c:'',d:true};
+    if(!z&&qtyOf(p.id)>=p.stock)return {t:'Ya tenés todas',c:'',d:true};
+    if(!z)return {t:'Elegí tu talle',c:'',d:false};
+    return {t:'Agregar al pedido',c:' is-ready',d:false};
+  }
+  function cardHTML(p){
+    var out=p.stock<=0,b=btnState(p);
+    var tag=out?'<span class="tag tag--soldout">SOLD_OUT</span>':'<span class="tag tag--stock">QUEDAN '+p.stock+'</span>';
+    var strip=out?'<div class="sizes-off">Talles: S M L XL</div>':'<div class="strip" role="group" aria-label="Talle de '+p.name+'">'+SIZES.map(function(s){var no=p.sizes[s]<=0;return '<button type="button" class="sz" data-s="'+s+'" aria-pressed="'+(sel[p.id]===s)+'"'+(no?' disabled aria-label="'+s+', agotado" title="Agotado"':'')+'>'+s+'</button>'}).join('')+'</div>';
+    return '<article class="card'+(out?' card--out':'')+'" data-id="'+p.id+'">'
+      +'<div class="card__top"><span class="cat">'+p.cat+'</span>'+tag+'</div>'
+      +'<div class="media"><img src="'+p.img+'" width="1000" height="800" alt="'+p.alt+'" decoding="async"></div>'
+      +strip
+      +'<div class="card__body"><div class="card__row"><h3 class="card__name">'+p.name+'</h3><span class="card__price">'+fmt(p.price)+'</span></div>'
+      +'<div class="card__cta"><button type="button" class="btn btn--add'+b.c+'" data-add'+(b.d?' disabled':'')+'>'+b.t+'</button><p class="hint" data-hint aria-live="polite"></p></div>'
+      +(out?'':'<button type="button" class="more" data-detail>Ver detalle</button>')
+      +'</div></article>';
+  }
+  function visible(){return P.filter(function(p){return (cat==='Todo'||p.cat===cat)&&!(hide&&p.stock<=0)})}
+  function render(){
+    recalc();
+    var v=visible();
+    car.innerHTML=v.map(cardHTML).join('');
+    var none=v.length===0;
+    carwrap.hidden=none;empty.hidden=!none;
+    if(none){empty.innerHTML='<div class="empty"><h3>Nada por acá.</h3><p>Con ese filtro no queda ninguna prenda.</p><button type="button" class="btn btn--secondary" id="clear">Limpiar filtro</button></div>'}
+    document.getElementById('count').textContent=v.length+(v.length===1?' pieza':' piezas');
+    buildDots(v.length);
+    requestAnimationFrame(function(){measure();updateCar()});
+    CRUDO.renderSold();
+    if(det&&det.open)renderDetail();
+  }
+  function updateCard(id){
+    var c=car.querySelector('[data-id="'+id+'"]');if(!c)return;
+    var p=byId(id),b=btnState(p),a=c.querySelector('[data-add]');
+    a.textContent=b.t;a.className='btn btn--add'+b.c;a.disabled=b.d;
+    c.querySelectorAll('.sz').forEach(function(x){x.setAttribute('aria-pressed',String(sel[id]===x.dataset.s))});
+    if(det.open&&detId===id)renderDetail();
+  }
+
+  /* ---------- carrusel (celular) ---------- */
+  var dots=document.getElementById('dots'),prev=document.getElementById('prev'),next=document.getElementById('next'),idx=0,n=0;
+  function step(){var c=car.querySelector('.card');return c?c.offsetWidth+12:1}
+  function buildDots(k){
+    n=k;dots.innerHTML='';
+    for(var i=0;i<k;i++){var d=document.createElement('button');d.type='button';d.className='dot';d.setAttribute('aria-label','Ir a la pieza '+(i+1));d.innerHTML='<i></i>';(function(i){d.addEventListener('click',function(){car.scrollTo({left:i*step(),behavior:reduce?'auto':'smooth'})})})(i);dots.appendChild(d)}
+    dots.hidden=k<2;
+  }
+  function updateCar(){
+    if(!n)return;
+    idx=Math.round(car.scrollLeft/step());
+    if(car.scrollLeft+car.clientWidth>=car.scrollWidth-2)idx=n-1;
+    idx=Math.max(0,Math.min(n-1,idx));
+    dots.querySelectorAll('.dot').forEach(function(d,i){if(i===idx)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')});
+    prev.disabled=car.scrollLeft<=2;next.disabled=car.scrollLeft+car.clientWidth>=car.scrollWidth-2;
+  }
+  function measure(){
+    var m=car.querySelector('.media');if(!m)return;
+    carwrap.style.setProperty('--arrow-top',(m.offsetTop+m.offsetHeight/2-24)+'px');
+  }
+  var raf;car.addEventListener('scroll',function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(updateCar)},{passive:true});
+  prev.addEventListener('click',function(){car.scrollBy({left:-step(),behavior:reduce?'auto':'smooth'})});
+  next.addEventListener('click',function(){car.scrollBy({left:step(),behavior:reduce?'auto':'smooth'})});
+  addEventListener('resize',function(){measure();updateCar()});
+
+  /* ---------- acciones en las tarjetas ---------- */
+  car.addEventListener('click',function(e){
+    var card=e.target.closest('.card');if(!card)return;
+    var id=card.dataset.id,p=byId(id);
+    var sz=e.target.closest('.sz');
+    if(sz){sel[id]=sz.dataset.s;card.querySelector('.strip').classList.remove('need');card.querySelector('[data-hint]').textContent='';updateCard(id);return}
+    var add=e.target.closest('[data-add]');
+    if(add&&!add.disabled){
+      var hint=card.querySelector('[data-hint]'),strip=card.querySelector('.strip');
+      var r=addToCart(id);
+      if(r==='need'){hint.textContent='Falta el talle.';strip.classList.add('need');return}
+      if(r==='max')return;
+      add.textContent='Agregado ✓';add.className='btn btn--add is-ok';
+      clearTimeout(add._t);add._t=setTimeout(function(){updateCard(id)},1400);
+      return;
+    }
+    if(e.target.closest('[data-detail]')){openDetail(id)}
+  });
+
+  /* ---------- filtros ---------- */
+  function setCat(c){
+    cat=c;
+    document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-pressed',String(t.dataset.cat===c))});
+    render();
+  }
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;
+    setCat(b.dataset.cat);
+  });
+  document.querySelector('.cats').addEventListener('click',function(e){
+    var a=e.target.closest('a[data-cat]');if(!a)return;
+    e.preventDefault();
+    setCat(a.dataset.cat);
+    document.getElementById('grilla').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  });
+  /* altura del encabezado fijo (compu) para que el salto no quede tapado */
+  var hdr=document.querySelector('.site-header');
+  function hh(){document.documentElement.style.setProperty('--header-h',(matchMedia('(min-width:900px)').matches?hdr.offsetHeight:0)+'px')}
+  hh();addEventListener('resize',hh);
+  var sw=document.getElementById('hide');
+  sw.addEventListener('click',function(){hide=!hide;sw.setAttribute('aria-checked',String(hide));render()});
+  empty.addEventListener('click',function(e){
+    if(!e.target.closest('#clear'))return;
+    cat='Todo';hide=false;sw.setAttribute('aria-checked','false');
+    document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-pressed',String(t.dataset.cat==='Todo'))});
+    render();
+  });
+
+  /* ---------- 5. ventana de detalle ---------- */
+  var det=document.getElementById('det'),detIn=document.getElementById('det-in'),detId=null,detT;
+  function renderDetail(){
+    var p=byId(detId);if(!p)return;
+    var b=btnState(p),out=p.stock<=0;
+    var tag=out?'<span class="tag tag--soldout">SOLD_OUT</span>':'<span class="tag tag--stock">QUEDAN '+p.stock+'</span>';
+    var strip='<div class="strip" role="group" aria-label="Talle">'+SIZES.map(function(s){var no=p.sizes[s]<=0;return '<button type="button" class="sz" data-s="'+s+'" aria-pressed="'+(sel[p.id]===s)+'"'+(no?' disabled aria-label="'+s+', agotado" title="Agotado"':'')+'>'+s+'</button>'}).join('')+'</div>';
+    var keep=detIn.querySelector('.det__body');var top=keep?keep.scrollTop:0;
+    detIn.innerHTML='<div class="det__bar"><span class="kicker">DETALLE / '+p.cat.toUpperCase()+'</span><button type="button" class="det__x" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>'
+      +'<div class="det__body"><div class="det__media" data-zoom><img src="'+p.img+'" width="1000" height="800" alt="'+p.alt+'"></div>'
+      +'<div class="det__info"><h2 class="det__name" id="det-name">'+p.name+'</h2><div class="det__pr"><p class="det__price">'+fmt(p.price)+'</p>'+tag+'</div>'
+      +'<div class="det__sizes"><p class="det__lbl">Talle</p>'+strip+'<p class="det__fit">'+p.fit+'</p></div>'
+      +'<p class="det__desc">'+p.desc+'</p><p class="det__tirada">Tirada de '+p.total+'.</p>'
+      +'<div class="det__cta"><button type="button" class="btn btn--add'+b.c+'" data-add'+(b.d?' disabled':'')+'>'+b.t+'</button><p class="hint" data-hint aria-live="polite"></p></div></div></div>';
+    if(keep)detIn.querySelector('.det__body').scrollTop=top;
+  }
+  function openDetail(id){detId=id;renderDetail();document.documentElement.classList.add('det-open');if(!det.open)det.showModal();det.focus();det.querySelector('.det__body').scrollTop=0}
+  det.addEventListener('close',function(){document.documentElement.classList.remove('det-open')});
+  det.addEventListener('click',function(e){
+    if(e.target===det){det.close();return}
+    if(e.target.closest('[data-close]')){det.close();return}
+    var p=byId(detId),sz=e.target.closest('.sz');
+    if(sz&&!sz.disabled){sel[detId]=sz.dataset.s;updateCard(detId);renderDetail();return}
+    var add=e.target.closest('[data-add]');
+    if(add&&!add.disabled){
+      var r=addToCart(detId);
+      if(r==='need'){detIn.querySelector('[data-hint]').textContent='Falta el talle.';detIn.querySelector('.strip').classList.add('need');return}
+      if(r==='max')return;
+      updateCard(detId);
+      var a2=detIn.querySelector('[data-add]');a2.textContent='Agregado ✓';a2.className='btn btn--add is-ok';
+      clearTimeout(detT);detT=setTimeout(function(){if(det.open)renderDetail()},1400);
+    }
+  });
+  /* zoom de la foto al pasar el cursor (solo con mouse) */
+  det.addEventListener('mousemove',function(e){
+    var m=e.target.closest('[data-zoom]');if(!m)return;
+    var r=m.getBoundingClientRect(),im=m.querySelector('img');
+    im.style.transformOrigin=((e.clientX-r.left)/r.width*100)+'% '+((e.clientY-r.top)/r.height*100)+'%';
+  });
+  CRUDO.openDetail=openDetail;
+
+  /* ---------- 6. panel del pedido ---------- */
+  var FREE=120000,cp=document.getElementById('cp'),cpIn=document.getElementById('cp-in');
+  var XS='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>';
+  function renderPanel(){
+    var ae=document.activeElement,fk=ae&&ae.dataset?ae.dataset.k:null;
+    var n=cartCount(),t=cartTotal();
+    var h='<div class="cp__h"><h2 class="cp__ti" id="cp-t">Tu pedido'+(n?'<span>('+n+')</span>':'')+'</h2><button type="button" class="det__x" data-cpclose data-k="close" aria-label="Cerrar pedido">'+XS+'</button></div>';
+    if(!n){
+      h+='<div class="cp__b"><div class="cp__empty"><h3>Nada por acá.</h3><p>Todavía no elegiste ninguna prenda. Se acaban.</p><button type="button" class="btn btn--secondary" data-cpback data-k="back">Elegir prendas</button></div></div>';
+    }else{
+      h+='<div class="cp__b">'+cart.map(function(l,i){
+        var p=byId(l.id),full=l.qty>=p.sizes[l.size];
+        return '<div class="cp__ln"><img src="'+p.img+'" width="1000" height="800" alt="">'
+          +'<div><h3 class="cp__nm">'+p.name+'</h3><p class="cp__meta">Talle '+l.size+'</p>'
+          +'<div class="cp__r"><div class="step"><button type="button" data-act="dec" data-i="'+i+'" data-k="dec'+i+'" aria-label="Una menos, '+p.name+'">−</button><output aria-label="Cantidad">'+l.qty+'</output><button type="button" data-act="inc" data-i="'+i+'" data-k="inc'+i+'" aria-label="Una más, '+p.name+'"'+(full?' disabled':'')+'>+</button></div><span class="cp__sub">'+fmt(p.price*l.qty)+'</span></div></div>'
+          +'<button type="button" class="cp__rm" data-act="rm" data-i="'+i+'" data-k="rm'+i+'" aria-label="Quitar '+p.name+', talle '+l.size+'" title="Quitar">'+XS+'</button></div>';
+      }).join('')+'</div>';
+      var left=FREE-t,pc=Math.min(100,Math.floor(t/FREE*100));
+      h+='<div class="cp__f"><div class="cp__ship"><p>'+(left>0?'Te faltan '+fmt(left)+' para envío gratis.':'Envío gratis.')+'</p><div class="cp__track"><i style="width:'+pc+'%"></i></div></div>'
+        +'<div class="cp__tot"><span class="l">Total</span><span class="v">'+fmt(t)+'</span></div>'
+        +'<button type="button" class="btn btn--primary cp__go" data-go data-k="go">Ir a pagar <span class="btn__arrow" aria-hidden="true">→</span></button></div>';
+    }
+    cpIn.innerHTML=h;
+    if(fk){var el=cpIn.querySelector('[data-k="'+fk+'"]:not([disabled])')||cpIn.querySelector('[data-k="close"]');if(el)el.focus()}
+  }
+  function refreshAll(){renderCart(false);renderPanel();P.forEach(function(p){updateCard(p.id)})}
+  function openCart(){renderPanel();document.documentElement.classList.add('det-open');if(!cp.open)cp.showModal();cp.focus()}
+  document.addEventListener('click',function(e){if(e.target.closest('[data-open-cart]'))openCart()});
+  cp.addEventListener('close',function(){document.documentElement.classList.remove('det-open')});
+  cp.addEventListener('click',function(e){
+    if(e.target===cp){cp.close();return}
+    if(e.target.closest('[data-cpclose]')){cp.close();return}
+    if(e.target.closest('[data-cpback]')){cp.close();document.getElementById('grilla').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});return}
+    if(e.target.closest('[data-go]')){checkout();return}
+    var b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+    var i=+b.dataset.i,l=cart[i];if(!l)return;
+    var p=byId(l.id);
+    if(b.dataset.act==='inc'&&l.qty<p.sizes[l.size])l.qty++;
+    if(b.dataset.act==='dec'){l.qty--;if(l.qty<1)cart.splice(i,1)}
+    if(b.dataset.act==='rm')cart.splice(i,1);
+    refreshAll();
+  });
+  CRUDO.openCart=openCart;
+
+  /* ---------- cartel de "pago realizado" (simulado: no se cobra ni se guarda nada) ---------- */
+  var done=document.getElementById('done'),doneIn=document.getElementById('done-in');
+  function checkout(){
+    if(!cart.length)return;
+    var lines=cart.map(function(l){var p=byId(l.id);return {name:p.name,size:l.size,qty:l.qty,sub:p.price*l.qty}});
+    var sub=cartTotal(),ship=sub>=FREE?0:6500,total=sub+ship;
+    var num='CRU-'+String(Math.floor(Math.random()*900000)+100000);
+    /* el stock baja de verdad, en la página */
+    cart.forEach(function(l){var p=byId(l.id);p.sizes[l.size]=Math.max(0,p.sizes[l.size]-l.qty)});
+    cart.length=0;renderCart(false);render();
+    cp.close();
+    doneIn.innerHTML='<span class="done__num">'+num+'</span>'
+      +'<h2 id="done-t">Pago realizado.</h2>'
+      +'<p class="done__lead">Tu pedido llega en 3 a 7 días hábiles. Lo preparamos y te avisamos. Cuando se agota, se agotó. Gracias.</p>'
+      +'<ul class="done__list">'+lines.map(function(l){return '<li><span>'+l.qty+' × '+l.name+' / '+l.size+'</span><span>'+fmt(l.sub)+'</span></li>'}).join('')+'</ul>'
+      +'<div class="done__sum"><div><span>Subtotal</span><span>'+fmt(sub)+'</span></div><div><span>Envío</span><span>'+(ship?fmt(ship):'Gratis')+'</span></div><div class="t"><span>Total pagado</span><span>'+fmt(total)+'</span></div></div>'
+      +'<p class="done__note">Pedido de ejemplo: no se cobró nada ni se guardó nada.</p>'
+      +'<div class="done__btns"><button type="button" class="btn btn--primary" data-donecl>Volver a la tienda</button><a class="btn btn--secondary" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Seguir en Instagram</a></div>';
+    document.documentElement.classList.add('det-open');
+    done.showModal();done.focus();doneIn.scrollTop=0;
+  }
+  done.addEventListener('close',function(){document.documentElement.classList.remove('det-open')});
+  done.addEventListener('click',function(e){
+    if(e.target.closest('[data-donecl]')){done.close();document.getElementById('grilla').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})}
+  });
+
+  /* ---------- cuenta regresiva: misma clave que la landing ---------- */
+  var KEY='crudo_primera_visita',t0=Date.now();
+  try{var s=parseInt(localStorage.getItem(KEY),10);if(s)t0=s;else localStorage.setItem(KEY,String(t0));}catch(e){}
+  var end=t0+7*864e5,els={};
+  ['d','h','m','s'].forEach(function(k){els[k]=document.querySelectorAll('[data-cd="'+k+'"]')});
+  function p2(x){return String(x).padStart(2,'0')}
+  function tick(){
+    var s=Math.max(0,Math.floor((end-Date.now())/1000));
+    var v={d:p2(Math.floor(s/86400)),h:p2(Math.floor(s%86400/3600)),m:p2(Math.floor(s%3600/60)),s:p2(s%60)};
+    for(var k in v)els[k].forEach(function(e){e.textContent=v[k]});
+  }
+  tick();setInterval(tick,1000);
+
+  renderCart(false);render();
+})();
+</script>
+</body>
+</html>
