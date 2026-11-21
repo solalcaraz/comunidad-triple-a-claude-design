@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRUDO — Drop 01. Tirada limitada.</title>
+<meta name="description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: cuando vuela, voló.">
+<meta name="theme-color" content="#0E0E0E">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="CRUDO — Drop 01. Tirada limitada.">
+<meta property="og:description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: cuando vuela, voló.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js'</script>
+<style>
+:root{
+  --negro:#0E0E0E;--asfalto:#1C1C1C;--hueso:#EDEDED;--volt:#D6FF00;--gris-humo:#8A8A8A;--rojo-alerta:#FF3B2F;
+  --font-display:'Anton','Archivo Black',Impact,sans-serif;
+  --font-sans:'Inter',Helvetica,Arial,sans-serif;
+  --font-mono:'Courier Prime','Courier New',Courier,monospace;
+  --pad-x:16px;--pad-y:80px;--header-h:0px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--negro)}
+body{margin:0;background:var(--negro);color:var(--hueso);font-family:var(--font-sans);font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:3px solid var(--hueso);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--volt);color:var(--negro);padding:12px 16px;font-family:var(--font-mono);font-weight:700;text-transform:uppercase;text-decoration:none}
+.skip:focus{top:8px}
+section[id]{scroll-margin-top:var(--header-h)}
+
+/* ---------- utilidades de tipografía ---------- */
+.mono{font-family:var(--font-mono)}
+.kicker{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo);text-transform:uppercase}
+.h2{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase;color:var(--hueso)}
+.wrap{padding:var(--pad-y) var(--pad-x);max-width:1280px;margin:0 auto}
+.sec-head{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:20px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid transparent;border-radius:0;cursor:pointer;transition:transform .12s ease,background-color .12s ease,color .12s ease;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:translateY(2px)}
+.btn__arrow{display:inline-block;transition:transform .15s ease}
+.btn:hover .btn__arrow{transform:translateX(6px)}
+.btn--primary{background:var(--volt);color:var(--negro)}
+.btn--primary:focus-visible{outline-color:var(--hueso)}
+.btn--secondary{background:transparent;color:var(--hueso);border-color:var(--hueso)}
+.btn--secondary:hover{background:var(--hueso);color:var(--negro)}
+.btn--block{display:flex;width:100%}
+.btn[aria-disabled="true"],.btn:disabled{background:var(--asfalto);color:var(--gris-humo);border-color:var(--asfalto);cursor:not-allowed;pointer-events:none}
+.link{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-sans);font-weight:600;font-size:16px;color:var(--hueso);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.link:hover{text-decoration-thickness:3px}
+.tag{display:inline-flex;align-items:center;min-height:24px;padding:0 8px;font-family:var(--font-mono);font-weight:700;font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;border:1px solid transparent;border-radius:2px;white-space:nowrap}
+.tag--stock{background:var(--rojo-alerta);color:var(--negro)}
+.tag--soldout{background:var(--negro);color:var(--gris-humo);border-color:var(--gris-humo)}
+
+/* ---------- 1. ticker + encabezado ---------- */
+.site-header{position:relative;z-index:30;background:var(--negro)}
+.ticker{height:36px;overflow:hidden;background:var(--asfalto);display:flex;align-items:center}
+.ticker__track{display:flex;flex:none;white-space:nowrap;font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--hueso);animation:ticker 30s linear infinite}
+.ticker__seg{padding-right:12px}
+.ticker__seg b{font-weight:400;color:var(--rojo-alerta)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bar{display:flex;flex-direction:column}
+.logo{display:block;padding:20px var(--pad-x) 4px}
+.logo img{width:280px}
+.nav{display:flex;gap:24px;padding:0 var(--pad-x) 8px}
+.nav a{display:flex;align-items:center;min-height:48px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.nav a:hover{text-decoration:underline;text-underline-offset:6px}
+.bar .btn--header{display:none}
+.buy-bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:16px;background:var(--negro);border-top:1px solid var(--asfalto)}
+
+/* ---------- 2. hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--negro);height:calc(100svh - 208px);min-height:560px}
+.hero__img{position:absolute;left:0;bottom:0;width:100%;height:122%;object-fit:cover;object-position:50% 100%}
+.hero__body{position:absolute;left:16px;bottom:104px;right:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.hero h1{font-family:var(--font-display);font-weight:400;text-transform:uppercase;color:var(--hueso)}
+.hero h1 span{display:block}
+.hero h1 .l1{font-size:60px;line-height:.9}
+.hero h1 .l2{font-size:32px;line-height:1;margin-top:4px}
+.hero__sup{font-size:16px;line-height:24px}
+.cd-wrap{display:flex;flex-direction:column;gap:8px}
+.cd-label{font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase}
+.cd{display:flex;align-items:flex-start;gap:6px;font-family:var(--font-mono)}
+.cd__u{display:flex;flex-direction:column;gap:4px}
+.cd__n{font-weight:700;font-size:32px;line-height:1;color:var(--volt);font-variant-numeric:tabular-nums}
+.cd__l{font-size:12px;line-height:16px;letter-spacing:.08em}
+.cd__s{font-weight:700;font-size:32px;line-height:1}
+
+/* ---------- 3. el drop ---------- */
+.drop-head p{font-size:18px;line-height:28px}
+.drop{display:flex;flex-direction:column;gap:48px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
+.card{display:flex;flex-direction:column;gap:16px}
+.card__media{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--negro)}
+.card__media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .card__media img{transform:scale(1.06)}
+.card--out .card__media img{filter:grayscale(1) contrast(1.05)}
+.card__tag{position:absolute;top:16px;left:16px}
+.card__body{display:flex;flex-direction:column;gap:12px;flex:1}
+.card__name{font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1;text-transform:uppercase;min-height:2em}
+.card__meta{display:flex;flex-wrap:wrap;column-gap:24px;row-gap:4px;align-items:baseline;font-family:var(--font-mono)}
+.card__price{font-weight:700;font-size:16px;line-height:24px}
+.card__sizes{font-size:14px;line-height:20px;letter-spacing:.06em;color:var(--gris-humo)}
+.card__stock{font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--gris-humo);text-transform:uppercase}
+.card__cta{margin-top:auto}
+.card__cta .btn{padding:0 16px;width:100%}
+.sold{display:flex;flex-direction:column;gap:12px}
+.sold__row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono)}
+.sold__big{font-weight:700;font-size:18px;line-height:24px;letter-spacing:.02em}
+.sold__pct{font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--gris-humo)}
+.sold__track{height:12px;background:var(--asfalto)}
+.sold__fill{height:100%;width:75.5%;background:var(--volt)}
+
+/* ---------- 4. calle ---------- */
+.calle__photo{position:relative;overflow:hidden;aspect-ratio:5/4}
+.calle__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.calle__inner{position:relative;max-width:1280px;margin:0 auto;padding:0 var(--pad-x) 56px}
+.calle__row{position:relative;min-height:72px;padding-top:52px}
+.calle__title{position:absolute;left:0;top:-44px;z-index:2;font-family:var(--font-display);font-weight:400;font-size:38px;line-height:.95;text-transform:uppercase;color:var(--hueso)}
+.calle__title span{display:block}
+.calle__tela{position:absolute;right:0;top:-56px;z-index:2;width:112px;aspect-ratio:1/1;border:4px solid var(--negro);overflow:hidden;background:var(--negro)}
+.calle__tela img{width:100%;height:100%;object-fit:cover}
+.calle__cap{position:relative;display:flex;justify-content:space-between;max-width:230px;font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--gris-humo)}
+
+/* ---------- 5. quiénes somos ---------- */
+.q{display:flex;flex-direction:column;gap:32px}
+.q__cards{display:flex;flex-direction:column;gap:16px}
+.q__card{background:var(--asfalto);padding:24px;display:flex;flex-direction:column;gap:16px}
+.q__num{font-family:var(--font-display);font-size:88px;line-height:.8;color:var(--negro);-webkit-text-stroke:1px var(--gris-humo)}
+.q__card h3{font-family:var(--font-display);font-weight:400;font-size:40px;line-height:1;text-transform:uppercase}
+.q__card p{font-size:18px;line-height:28px}
+.q__band{background:var(--hueso);color:var(--negro);padding:24px 16px}
+.q__band p{font-family:var(--font-display);font-size:32px;line-height:1;text-transform:uppercase}
+.q__band br{display:block}
+
+/* ---------- 6. archivo ---------- */
+.arch{display:flex;flex-direction:column;gap:32px}
+.arch__list{display:flex;flex-direction:column;gap:12px}
+.arch__row{background:var(--asfalto);padding:24px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--hueso)}
+.arch__id{position:relative;display:inline-block;align-self:flex-start;font-family:var(--font-display);font-size:56px;line-height:1;text-transform:uppercase;color:var(--gris-humo)}
+.arch__id .strike{position:absolute;left:-13%;top:38%;width:126%;max-width:none;height:auto;transform:rotate(-3deg);pointer-events:none}
+.arch__det{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em}
+.arch__res{font-family:var(--font-mono);font-weight:700;font-size:12px;line-height:20px;letter-spacing:.08em;color:var(--gris-humo)}
+.arch__row--live{border:1px solid var(--hueso)}
+.arch__row--live .arch__id{color:var(--hueso)}
+.arch__row--live .arch__det{color:var(--gris-humo)}
+.arch__row--live .arch__res{color:var(--hueso);font-size:14px}
+.arch__row--live:hover .arch__res{text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- 7. preguntas ---------- */
+.faq{display:flex;flex-direction:column;gap:32px}
+.faq__list{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--asfalto)}
+.faq summary{list-style:none;cursor:pointer;min-height:56px;padding:20px;display:flex;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary span.q{flex:1;font-family:var(--font-display);font-size:28px;line-height:1.05;text-transform:uppercase;display:block}
+.faq__a{padding:0 20px 24px;font-size:18px;line-height:28px;max-width:760px}
+.qi{flex:none;width:24px;height:24px;position:relative}
+.qi::before,.qi::after{content:"";position:absolute;left:50%;top:50%;background:var(--hueso);transition:transform .25s ease}
+.qi::before{width:18px;height:2px;margin:-1px 0 0 -9px}
+.qi::after{width:2px;height:18px;margin:-9px 0 0 -1px}
+details[open] .qi::after{transform:rotate(90deg)}
+.faq summary:focus-visible{outline-color:var(--volt);outline-offset:2px}
+
+/* ---------- 8. cierre ---------- */
+.close{position:relative;overflow:hidden;background:var(--negro)}
+.close__bg{position:absolute;inset:0}
+.close__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.close__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,.82),rgba(14,14,14,.72))}
+.close__in{position:relative;display:flex;flex-direction:column;gap:32px}
+.close__row{display:flex;flex-direction:column;gap:32px}
+.close__logo{width:100%}
+.close__title{font-family:var(--font-display);font-weight:400;font-size:44px;line-height:.95;text-transform:uppercase}
+.close__cta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.close__cta .btn{width:100%}
+.close__cd{font-family:var(--font-mono);font-size:14px;line-height:24px;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums;margin-bottom:8px}
+.close__ig{display:inline-flex;align-items:center;min-height:48px;font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- 9. pie ---------- */
+.foot{padding:48px var(--pad-x) 120px;max-width:1280px;margin:0 auto}
+.foot__card{background:var(--asfalto);padding:24px;display:flex;flex-direction:column;gap:24px}
+.foot__main{display:flex;flex-direction:column;gap:24px}
+.foot__logo{width:240px}
+.foot__link{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:12px 0;border-top:1px solid var(--negro);font-family:var(--font-display);font-size:32px;line-height:1;text-transform:uppercase;text-decoration:none}
+.foot__link:hover span{transform:translateX(6px)}
+.foot__link span{transition:transform .15s ease}
+.foot__copy{font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.08em;color:var(--gris-humo)}
+
+/* ---------- aparición suave al hacer scroll ---------- */
+.js [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.js [data-reveal].in{opacity:1;transform:none}
+
+/* ---------- compu ---------- */
+@media (min-width:900px){
+  :root{--pad-x:48px;--pad-y:128px}
+  .site-header{position:sticky;top:0}
+  .bar{flex-direction:row;align-items:center;gap:48px;padding:16px 32px;border-bottom:1px solid var(--asfalto)}
+  .logo{padding:0}.logo img{width:240px}
+  .nav{padding:0;gap:32px;flex:1}
+  .bar .btn--header{display:inline-flex;flex:none}
+  .buy-bar{display:none}
+  .hero{height:calc(100svh - 148px);min-height:560px;max-height:760px}
+  .hero__img{inset:0;width:100%;height:100%;object-position:60% 30%}
+  .hero__body{left:48px;bottom:48px;gap:16px}
+  .hero h1 .l1{font-size:120px}.hero h1 .l2{font-size:64px;margin-top:8px}
+  .hero__sup{font-size:20px;line-height:31px}
+  .cd{gap:12px}.cd__n,.cd__s{font-size:64px}
+  .drop{gap:64px}
+  .grid{gap:64px 32px}
+  .card__media{aspect-ratio:5/4}
+  .card__name{font-size:56px;min-height:0}
+  .card__price{font-size:20px}
+  .card__cta{width:280px}.card__cta .btn{padding:0 32px}
+  .h2{font-size:64px}
+  .calle__photo{aspect-ratio:2/1;max-height:780px}
+  .calle__inner{padding-bottom:96px}
+  .calle__row{min-height:164px;padding-top:107px}
+  .calle__title{font-size:96px;top:-99px}
+  .calle__tela{width:280px;top:-140px;border-width:8px}
+  .calle__cap{max-width:700px}
+  .q{gap:48px}
+  .q__cards{flex-direction:row;gap:24px}
+  .q__card{flex:1;padding:32px;gap:24px}
+  .q__num{font-size:120px}
+  .q__card h3{font-size:48px}
+  .q__band{padding:48px}
+  .q__band p{font-size:64px}
+  .q__band br{display:none}
+  .arch{gap:48px}
+  .arch__list{gap:16px}
+  .arch__row{padding:32px;display:grid;grid-template-columns:1fr 1.4fr auto;gap:32px;align-items:center}
+  .arch__id{font-size:88px}
+  .arch__det{font-size:18px}
+  .arch__res{font-size:14px}
+  .arch__row--live .arch__res{font-size:18px}
+  .faq{gap:48px}
+  .faq__list{gap:12px}
+  .faq summary{padding:28px 32px}
+  .faq summary span.q{font-size:36px}
+  .faq__a{padding:0 32px 32px}
+  .close__in{gap:48px}
+  .close__title{font-size:80px}
+  .close__row{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;flex-wrap:wrap}
+  .close__cta{min-width:380px}
+  .close__cd{font-size:18px}
+  .foot{padding:80px 48px}
+  .foot__card{padding:48px;gap:48px}
+  .foot__main{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .foot__logo{width:320px}
+  .foot__link{font-size:40px;padding:16px 0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker__track{animation:none}
+  .btn,.btn__arrow,.card__media img,.qi::before,.qi::after,.foot__link span{transition:none!important}
+  .card:hover .card__media img,.btn:hover .btn__arrow,.foot__link:hover span{transform:none!important}
+  .js [data-reveal]{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#drop">Ir al drop</a>
+
+<!-- 1 · TICKER + ENCABEZADO -->
+<header class="site-header" id="top">
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+    </div>
+  </div>
+  <div class="bar">
+    <a class="logo" href="#top" aria-label="CRUDO, ir al inicio"><img src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#drop">Drop</a><a href="#quienes">Quiénes</a><a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn--primary btn--header" href="tienda.html">Comprar el drop <span class="btn__arrow" aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main>
+<!-- 2 · HERO -->
+<section class="hero" aria-labelledby="hero-t">
+  <picture>
+    <source media="(min-width:900px)" srcset="assets/hero-escritorio.jpg">
+    <img class="hero__img" src="assets/hero-vertical.jpg" width="928" height="1152" alt="Hombre agachado con gorra y remera CRUDO frente a una persiana y un grafiti volt" fetchpriority="high">
+  </picture>
+  <div class="hero__body">
+    <h1 id="hero-t"><span class="l1">Nuevo drop.</span><span class="l2">Tirada limitada.</span></h1>
+    <p class="hero__sup">Cuando vuela, voló.</p>
+    <div class="cd-wrap">
+      <span class="cd-label">Cierra el drop en</span>
+      <div class="cd" role="timer" aria-label="Tiempo que queda del drop">
+        <div class="cd__u"><span class="cd__n" data-cd="d">06</span><span class="cd__l">DÍAS</span></div><span class="cd__s">:</span>
+        <div class="cd__u"><span class="cd__n" data-cd="h">23</span><span class="cd__l">HORAS</span></div><span class="cd__s">:</span>
+        <div class="cd__u"><span class="cd__n" data-cd="m">59</span><span class="cd__l">MIN</span></div><span class="cd__s">:</span>
+        <div class="cd__u"><span class="cd__n" data-cd="s">59</span><span class="cd__l">SEG</span></div>
+      </div>
+    </div>
+    <a class="link" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Seguinos en Instagram</a>
+  </div>
+</section>
+
+<!-- 3 · EL DROP -->
+<section id="drop" aria-labelledby="drop-t">
+  <div class="wrap drop">
+    <div class="sec-head drop-head" data-reveal>
+      <span class="kicker">DROP_01 / 25</span>
+      <h2 class="h2" id="drop-t">Lo que hay hoy.</h2>
+      <p>Mañana puede no estar.</p>
+    </div>
+    <div class="grid">
+      <article class="card" data-reveal>
+        <div class="card__media"><img src="assets/prod-buzo-sin-filtro.jpg" srcset="assets/prod-buzo-sin-filtro-560.jpg 560w, assets/prod-buzo-sin-filtro.jpg 1000w" sizes="(min-width:900px) 50vw, 50vw" width="1000" height="800" loading="lazy" alt="Buzo negro SIN FILTRO"><span class="card__tag tag tag--stock">QUEDAN 23</span></div>
+        <div class="card__body">
+          <h3 class="card__name">Buzo Sin Filtro</h3>
+          <div class="card__meta"><span class="card__price">$89.900</span><span class="card__sizes">S M L XL</span></div>
+          <p class="card__stock">Quedan 23 de 100</p>
+          <div class="card__cta"><a class="btn btn--secondary" href="tienda.html">Comprar <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      <article class="card" data-reveal>
+        <div class="card__media"><img src="assets/prod-remera-sin-poses-negra.jpg" srcset="assets/prod-remera-sin-poses-negra-560.jpg 560w, assets/prod-remera-sin-poses-negra.jpg 1000w" sizes="(min-width:900px) 50vw, 50vw" width="1000" height="800" loading="lazy" alt="Remera negra SIN POSES"><span class="card__tag tag tag--stock">QUEDAN 36</span></div>
+        <div class="card__body">
+          <h3 class="card__name">Remera Sin Poses</h3>
+          <div class="card__meta"><span class="card__price">$42.900</span><span class="card__sizes">S M L XL</span></div>
+          <p class="card__stock">Quedan 36 de 120</p>
+          <div class="card__cta"><a class="btn btn--secondary" href="tienda.html">Comprar <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+      <article class="card card--out" data-reveal>
+        <div class="card__media"><img src="assets/prod-remera-hueso.jpg" srcset="assets/prod-remera-hueso-560.jpg 560w, assets/prod-remera-hueso.jpg 1000w" sizes="(min-width:900px) 50vw, 50vw" width="1000" height="800" loading="lazy" alt="Remera HUESO, agotada"><span class="card__tag tag tag--soldout">SOLD_OUT</span></div>
+        <div class="card__body">
+          <h3 class="card__name">Remera Hueso</h3>
+          <div class="card__meta"><span class="card__price">$42.900</span><span class="card__sizes">S M L XL</span></div>
+          <div class="card__cta"><button class="btn btn--block" type="button" disabled>Agotado</button></div>
+        </div>
+      </article>
+      <article class="card" data-reveal>
+        <div class="card__media"><img src="assets/prod-gorra-sin-vueltas.jpg" srcset="assets/prod-gorra-sin-vueltas-560.jpg 560w, assets/prod-gorra-sin-vueltas.jpg 1000w" sizes="(min-width:900px) 50vw, 50vw" width="1000" height="800" loading="lazy" alt="Gorra negra SIN VUELTAS"><span class="card__tag tag tag--stock">QUEDAN 39</span></div>
+        <div class="card__body">
+          <h3 class="card__name">Gorra Sin Vueltas</h3>
+          <div class="card__meta"><span class="card__price">$29.900</span><span class="card__sizes">S M L XL</span></div>
+          <p class="card__stock">Quedan 39 de 100</p>
+          <div class="card__cta"><a class="btn btn--secondary" href="tienda.html">Comprar <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+        </div>
+      </article>
+    </div>
+    <div class="sold" data-reveal>
+      <div class="sold__row"><span class="sold__big">302 / 400 VENDIDAS</span><span class="sold__pct">75%</span></div>
+      <div class="sold__track" role="img" aria-label="302 de 400 vendidas"><div class="sold__fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · DE LA CALLE -->
+<section class="calle" aria-labelledby="calle-t">
+  <div class="calle__photo"><img src="assets/calle.jpg" width="1536" height="1024" loading="lazy" alt="Cuatro personas con ropa CRUDO en la calle, frente a una persiana con grafiti volt"></div>
+  <div class="calle__inner">
+    <div class="calle__row">
+      <h2 class="calle__title" id="calle-t"><span>De la calle.</span><span>Para la calle.</span></h2>
+      <div class="calle__tela"><img src="assets/tela.jpg" width="1440" height="1439" loading="lazy" alt="Detalle de la tela del buzo, negro con trama visible"></div>
+      <div class="calle__cap"><span>ASFALTO / LUZ / TELA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · QUIÉNES SOMOS -->
+<section id="quienes" aria-labelledby="q-t">
+  <div class="wrap q">
+    <div class="sec-head" data-reveal>
+      <span class="kicker">02 / QUIÉNES</span>
+      <h2 class="h2" id="q-t">No pedimos permiso.</h2>
+    </div>
+    <div class="q__cards">
+      <div class="q__card" data-reveal><span class="q__num" aria-hidden="true">01</span><h3>Actitud</h3><p>Vestirse para decir quién sos, no para esconderte.</p></div>
+      <div class="q__card" data-reveal><span class="q__num" aria-hidden="true">02</span><h3>Autenticidad</h3><p>Venimos de la cultura urbana, no la imitamos.</p></div>
+      <div class="q__card" data-reveal><span class="q__num" aria-hidden="true">03</span><h3>Escasez</h3><p>Ediciones limitadas. Lo exclusivo tiene valor.</p></div>
+    </div>
+    <div class="q__band" data-reveal><p>Sin filtro.<br> Sin poses.<br> Sin vueltas.</p></div>
+  </div>
+</section>
+
+<!-- 6 · ARCHIVO DE AGOTADOS -->
+<section aria-labelledby="a-t">
+  <div class="wrap arch">
+    <div class="sec-head" data-reveal>
+      <span class="kicker">03 / ARCHIVO</span>
+      <h2 class="h2" id="a-t">Lo que ya voló.</h2>
+    </div>
+    <div class="arch__list">
+      <div class="arch__row" data-reveal>
+        <span class="arch__id"><span>DROP_00</span><img class="strike" src="assets/tachado.png" alt="" width="2188" height="140" loading="lazy"></span>
+        <span class="arch__det">PRIMERA TIRADA / 80 BUZOS</span>
+        <span class="arch__res">SOLD_OUT EN 3 DÍAS</span>
+      </div>
+      <div class="arch__row" data-reveal>
+        <span class="arch__id"><span>DROP_00B</span><img class="strike" src="assets/tachado.png" alt="" width="2188" height="140" loading="lazy"></span>
+        <span class="arch__det">ASFALTO / 60 GORRAS</span>
+        <span class="arch__res">SOLD_OUT EN 2 DÍAS</span>
+      </div>
+      <a class="arch__row arch__row--live" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener" data-reveal>
+        <span class="arch__id">DROP_02</span>
+        <span class="arch__det">PRÓXIMAMENTE</span>
+        <span class="arch__res">SE AVISA POR INSTAGRAM →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · PREGUNTAS -->
+<section id="preguntas" aria-labelledby="f-t">
+  <div class="wrap faq">
+    <div class="sec-head" data-reveal>
+      <span class="kicker">04 / PREGUNTAS</span>
+      <h2 class="h2" id="f-t">Preguntas.</h2>
+    </div>
+    <div class="faq__list" data-reveal>
+      <details open><summary><span class="q">¿Cuándo es el próximo drop?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Se avisa primero por Instagram. Sin fecha todavía. Seguinos para no llegar tarde.</p></details>
+      <details><summary><span class="q">¿Se repone lo agotado?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">No. Cuando se agota, se agotó.</p></details>
+      <details><summary><span class="q">¿Cómo calzan los talles?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Buzo y remeras son oversize. Si querés el calce justo, pedí un talle menos. Hay S, M, L y XL.</p></details>
+      <details><summary><span class="q">¿Cuánto tarda y cuánto cuesta el envío?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Salimos a todo el país. Llega en 3 a 7 días hábiles. Cuesta $6.500 y es gratis desde $120.000.</p></details>
+      <details><summary><span class="q">¿Puedo cambiar el talle?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Sí, dentro de los 10 días, con la prenda sin uso y con etiqueta.</p></details>
+      <details><summary><span class="q">¿Cómo compro?</span><span class="qi" aria-hidden="true"></span></summary><p class="faq__a">Apretás "Comprar el drop" y te lleva a la tienda. Ahí elegís talle, pagás y listo.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · CIERRE -->
+<section class="close" aria-labelledby="c-t">
+  <div class="close__bg" aria-hidden="true"><img src="assets/calle.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
+  <div class="wrap">
+    <div class="close__in">
+      <img class="close__logo" src="assets/crudo-logo-volt.png" alt="CRUDO" width="1371" height="449" loading="lazy">
+      <div class="close__row">
+        <h2 class="close__title" id="c-t">Última llamada.</h2>
+        <div class="close__cta">
+          <div class="close__cd" role="timer" aria-label="Tiempo que queda del drop">Cierra en <span data-cd="d">06</span> d / <span data-cd="h">23</span> h / <span data-cd="m">59</span> m / <span data-cd="s">59</span> s</div>
+          <a class="btn btn--primary btn--block" href="tienda.html">Comprar el drop <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="close__ig" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Seguinos en Instagram →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 9 · PIE -->
+<footer class="foot">
+  <div class="foot__card">
+    <div class="foot__main">
+      <img class="foot__logo" src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449" loading="lazy">
+      <div>
+        <a class="foot__link" href="https://instagram.com/crudo.ejemplo" target="_blank" rel="noopener">Instagram @crudo.ejemplo <span aria-hidden="true">→</span></a>
+        <a class="foot__link" href="tienda.html">Tienda <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <p class="foot__copy">© 2026 CRUDO. Marca ficticia de un caso de práctica.</p>
+  </div>
+</footer>
+
+<!-- barra de compra fija (celular) -->
+<div class="buy-bar"><a class="btn btn--primary btn--block" href="tienda.html">Comprar el drop <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+
+<script>
+(function(){
+  /* Cuenta regresiva: el drop cierra 7 días después de la primera visita.
+     La fecha de la primera visita se guarda en el navegador; si no se puede guardar, cuenta desde ahora. */
+  var KEY='crudo_primera_visita',t0=Date.now();
+  try{var s=parseInt(localStorage.getItem(KEY),10);if(s)t0=s;else localStorage.setItem(KEY,String(t0));}catch(e){}
+  var end=t0+7*864e5,els={};
+  ['d','h','m','s'].forEach(function(k){els[k]=document.querySelectorAll('[data-cd="'+k+'"]')});
+  function p(n){return String(n).padStart(2,'0')}
+  function tick(){
+    var s=Math.max(0,Math.floor((end-Date.now())/1000));
+    var v={d:p(Math.floor(s/86400)),h:p(Math.floor(s%86400/3600)),m:p(Math.floor(s%3600/60)),s:p(s%60)};
+    for(var k in v)els[k].forEach(function(e){e.textContent=v[k]});
+  }
+  tick();setInterval(tick,1000);
+
+  /* Altura del encabezado fijo (compu) para que los anclas no queden tapados */
+  var h=document.querySelector('.site-header');
+  function hh(){document.documentElement.style.setProperty('--header-h',(matchMedia('(min-width:900px)').matches?h.offsetHeight:0)+'px')}
+  hh();addEventListener('resize',hh);
+
+  /* Aparición suave al hacer scroll */
+  var items=document.querySelectorAll('[data-reveal]');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){items.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  items.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
