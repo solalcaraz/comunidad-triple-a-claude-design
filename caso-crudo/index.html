@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CRUDO — Drop 01. Tirada limitada.</title>
-<meta name="description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: cuando vuela, voló.">
+<meta name="description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: si dudás, ya no está.">
 <meta name="theme-color" content="#0E0E0E">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="CRUDO — Drop 01. Tirada limitada.">
-<meta property="og:description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: cuando vuela, voló.">
+<meta property="og:description" content="Nuevo drop de CRUDO. Tirada limitada de ropa urbana: si dudás, ya no está.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -146,7 +146,7 @@ section[id]{scroll-margin-top:var(--header-h)}
 .arch__list{display:flex;flex-direction:column;gap:12px}
 .arch__row{background:var(--asfalto);padding:24px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--hueso)}
 .arch__id{position:relative;display:inline-block;align-self:flex-start;font-family:var(--font-display);font-size:56px;line-height:1;text-transform:uppercase;color:var(--gris-humo)}
-.arch__id .strike{position:absolute;left:-13%;top:38%;width:126%;max-width:none;height:auto;transform:rotate(-3deg);pointer-events:none}
+.arch__id .strike{position:absolute;left:-8%;top:38%;width:118%;max-width:none;height:auto;transform:rotate(-3deg);pointer-events:none}
 .arch__det{font-family:var(--font-mono);font-size:14px;line-height:20px;letter-spacing:.06em}
 .arch__res{font-family:var(--font-mono);font-weight:700;font-size:12px;line-height:20px;letter-spacing:.08em;color:var(--gris-humo)}
 .arch__row--live{border:1px solid var(--hueso)}
@@ -237,7 +237,7 @@ details[open] .qi::after{transform:rotate(90deg)}
   .arch{gap:48px}
   .arch__list{gap:16px}
   .arch__row{padding:32px;display:grid;grid-template-columns:1fr 1.4fr auto;gap:32px;align-items:center}
-  .arch__id{font-size:88px}
+  .arch__id{font-size:88px;justify-self:start}
   .arch__det{font-size:18px}
   .arch__res{font-size:14px}
   .arch__row--live .arch__res{font-size:18px}
@@ -274,14 +274,14 @@ details[open] .qi::after{transform:rotate(90deg)}
 <header class="site-header" id="top">
   <div class="ticker" aria-hidden="true">
     <div class="ticker__track">
-      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
-      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
-      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
-      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / CUANDO VUELA, VOLÓ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / SI DUDÁS, YA NO ESTÁ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / SI DUDÁS, YA NO ESTÁ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / SI DUDÁS, YA NO ESTÁ / <b>QUEDAN POCAS</b> /</span>
+      <span class="ticker__seg">DROP_01 / TIRADA LIMITADA / SI DUDÁS, YA NO ESTÁ / <b>QUEDAN POCAS</b> /</span>
     </div>
   </div>
   <div class="bar">
-    <a class="logo" href="#top" aria-label="CRUDO, ir al inicio"><img src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449"></a>
+    <a class="logo" href="#hero" aria-label="CRUDO, ir al inicio"><img src="assets/crudo-logo-hueso.png" alt="CRUDO" width="1371" height="449"></a>
     <nav class="nav" aria-label="Principal">
       <a href="#drop">Drop</a><a href="#quienes">Quiénes</a><a href="#preguntas">Preguntas</a>
     </nav>
@@ -291,14 +291,14 @@ details[open] .qi::after{transform:rotate(90deg)}
 
 <main>
 <!-- 2 · HERO -->
-<section class="hero" aria-labelledby="hero-t">
+<section class="hero" id="hero" aria-labelledby="hero-t">
   <picture>
     <source media="(min-width:900px)" srcset="assets/hero-escritorio.jpg">
     <img class="hero__img" src="assets/hero-vertical.jpg" width="928" height="1152" alt="Hombre agachado con gorra y remera CRUDO frente a una persiana y un grafiti volt" fetchpriority="high">
   </picture>
   <div class="hero__body">
     <h1 id="hero-t"><span class="l1">Nuevo drop.</span><span class="l2">Tirada limitada.</span></h1>
-    <p class="hero__sup">Cuando vuela, voló.</p>
+    <p class="hero__sup">Si dudás, ya no está.</p>
     <div class="cd-wrap">
       <span class="cd-label">Cierra el drop en</span>
       <div class="cd" role="timer" aria-label="Tiempo que queda del drop">
